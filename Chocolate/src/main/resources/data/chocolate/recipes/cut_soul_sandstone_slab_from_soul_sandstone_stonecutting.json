@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "chocolate:soul_sandstone"
+  },
+  "result": "chocolate:cut_soul_sandstone_slab",
+  "count": 2
+}

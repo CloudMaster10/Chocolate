@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chocolate:cut_soul_sandstone"
+    }
+  },
+  "result": {
+    "item": "chocolate:cut_soul_sandstone_slab",
+    "count": 6
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "chocolate:block/soul_sandstone_slab" },
+        "type=top": { "model": "chocolate:block/soul_sandstone_slab_top" },
+        "type=double": { "model": "chocolate:block/soul_sandstone" }
+    }
+}
