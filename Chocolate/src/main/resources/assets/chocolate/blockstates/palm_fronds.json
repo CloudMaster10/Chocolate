@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "": [
+        	{ "model": "chocolate:block/palm_fronds" },
+            { "model": "chocolate:block/palm_fronds", "y": 90 },
+            { "model": "chocolate:block/palm_fronds", "y": 180 },
+            { "model": "chocolate:block/palm_fronds", "y": 270 }
+        ]
+    }
+}

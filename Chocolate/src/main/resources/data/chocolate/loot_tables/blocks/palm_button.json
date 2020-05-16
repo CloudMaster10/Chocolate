@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "chocolate:soul_sandstone_wall"
+          "name": "chocolate:palm_button"
         }
       ],
       "conditions": [

@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "chocolate:block/palm_wood" },
+        "axis=z": { "model": "chocolate:block/palm_wood", "x": 90 },
+        "axis=x": { "model": "chocolate:block/palm_wood", "x": 90, "y": 90 }
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "chocolate:block/palm_slab" },
+        "type=top": { "model": "chocolate:block/palm_slab_top" },
+        "type=double": { "model": "chocolate:block/palm_planks" }
+    }
+}

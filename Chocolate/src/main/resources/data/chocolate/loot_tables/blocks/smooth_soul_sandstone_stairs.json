@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "chocolate:soul_sandstone_wall"
+          "name": "chocolate:smooth_soul_sandstone_stairs"
         }
       ],
       "conditions": [

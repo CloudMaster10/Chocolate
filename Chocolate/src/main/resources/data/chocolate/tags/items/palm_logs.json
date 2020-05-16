@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "chocolate:palm_log",
+    "chocolate:palm_wood",
+    "chocolate:stripped_palm_log",
+    "chocolate:stripped_palm_wood"
+  ]
+}

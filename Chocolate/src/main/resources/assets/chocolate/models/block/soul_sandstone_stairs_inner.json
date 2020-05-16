@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "chocolate:block/soul_sandstone_bottom",
+        "top": "chocolate:block/soul_sandstone_top",
+        "side": "chocolate:block/soul_sandstone"
+    }
+}

@@ -2,13 +2,32 @@
 	
 	
 	"block.chocolate.soul_sandstone": "Soul Sandstone",
+	"block.chocolate.soul_sandstone_slab": "Soul Sandstone Slab",
+	"block.chocolate.soul_sandstone_stairs": "Soul Sandstone Stairs",
+	"block.chocolate.soul_sandstone_wall": "Soul Sandstone Wall",
 	"block.chocolate.chiseled_soul_sandstone": "Chiseled Soul Sandstone",
 	"block.chocolate.cut_soul_sandstone": "Cut Soul Sandstone",
-	"block.chocolate.smooth_soul_sandstone": "Smooth Soul Sandstone",
-	"block.chocolate.soul_sandstone_slab": "Soul Sandstone Slab",
 	"block.chocolate.cut_soul_sandstone_slab": "Cut Soul Sandstone Slab",
+	"block.chocolate.smooth_soul_sandstone": "Smooth Soul Sandstone",
 	"block.chocolate.smooth_soul_sandstone_slab": "Smooth Soul Sandstone Slab",
-	"block.chocolate.soul_sandstone_wall": "Soul Sandstone Wall",
-	"block.chocolate.soul_sandstone_stairs": "Soul Sandstone Stairs",
-	"block.chocolate.smooth_soul_sandstone_wall": "Smooth Soul Sandstone Stairs"
+	"block.chocolate.smooth_soul_sandstone_stairs": "Smooth Soul Sandstone Stairs",
+	
+	"block.chocolate.bamboo_block": "Bamboo Block",
+
+	"block.chocolate.palm_sapling": "Palm Sapling",
+	"block.chocolate.palm_fronds": "Palm Fronds",
+	"block.chocolate.palm_log": "Palm Log",
+	"block.chocolate.palm_wood": "Palm Wood",
+	"block.chocolate.stripped_palm_log": "Stripped Palm Log",
+	"block.chocolate.stripped_palm_wood": "Stripped Palm Wood",
+	"block.chocolate.palm_planks": "Palm Planks",
+	"block.chocolate.palm_slab": "Palm Slab",
+	"block.chocolate.palm_stairs": "Palm Stairs",
+	"block.chocolate.palm_fence": "Palm Fence",
+	"block.chocolate.palm_fence_gate": "Palm Fence Gate",
+	"block.chocolate.palm_door": "Palm Door",
+	"block.chocolate.palm_trapdoor": "Palm Trapdoor",
+	"block.chocolate.palm_button": "Palm Button",
+	"block.chocolate.palm_pressure_plate": "Palm Pressure Plate",
+	"block.chocolate.palm_sign": "Palm Sign"
 }

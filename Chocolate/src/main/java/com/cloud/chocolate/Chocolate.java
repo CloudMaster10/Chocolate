@@ -1,78 +1,97 @@
 package com.cloud.chocolate;
 
-import net.minecraft.block.Block;
+import com.cloud.chocolate.init.ModBlocks;
+import com.cloud.chocolate.world.gen.feature.ModFeatures;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FireBlock;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.item.BlockItem;
+import net.minecraft.world.FoliageColors;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeColors;
+import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
+import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("chocolate")
+@Mod(Chocolate.MOD_ID)
 public class Chocolate
 {
-	
-    // Directly reference a log4j logger.
     //private static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "chocolate";
 	public static Chocolate instance;
 
     public Chocolate()
     {
-    	final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-    	modEventBus.addListener(this::setup);
-    	modEventBus.addListener(this::enqueueIMC);
-    	modEventBus.addListener(this::processIMC);
-    	modEventBus.addListener(this::doClientStuff);
-        
-        instance = this;
-
-        // Register ourselves for server and other game events we are interested in
+    	instance = this;
+    	
+    	// Register for server and other game events
         MinecraftForge.EVENT_BUS.register(this);
-    }
-
-    private void setup(final FMLCommonSetupEvent event)
-    {
-        // some preinit code
-    }
-
-    private void doClientStuff(final FMLClientSetupEvent event)
-    {
-        // do something that can only be done on the client
-    }
-
-    private void enqueueIMC(final InterModEnqueueEvent event)
-    {
-        // dispatch IMC to another mod
-    }
-
-    private void processIMC(final InterModProcessEvent event)
-    {
-        // receive and process InterModComms from other mods
+        
+        
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(Chocolate::commonInit);
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(Chocolate::clientInit));
     }
     
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event)
-    {
-        // do something when the server starts
-    }
-
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents
-    {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent)
-        {
-            // register a new block here
-        }
-    }
+    public static void commonInit(FMLCommonSetupEvent event)
+	{	
+    	// Place Features
+		for (Biome biomeIn : ForgeRegistries.BIOMES.getValues())
+		{
+			if (biomeIn == Biomes.BEACH)
+			{
+				biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, ModFeatures.PALM_TREE.withConfiguration(DefaultBiomeFeatures.OAK_TREE_CONFIG).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.35F, 2))));
+			}
+		}
+		
+		// Set Flammable
+		FireBlock fireblock = (FireBlock)Blocks.FIRE;
+        fireblock.setFireInfo(ModBlocks.palm_fronds, 30, 60);
+        fireblock.setFireInfo(ModBlocks.palm_log, 5, 5);
+        fireblock.setFireInfo(ModBlocks.palm_wood, 5, 5);
+        fireblock.setFireInfo(ModBlocks.stripped_palm_log, 5, 5);
+        fireblock.setFireInfo(ModBlocks.stripped_palm_wood, 5, 5);
+        fireblock.setFireInfo(ModBlocks.palm_planks, 5, 20);
+        fireblock.setFireInfo(ModBlocks.palm_slab, 5, 20);
+        fireblock.setFireInfo(ModBlocks.palm_stairs, 5, 20);
+        fireblock.setFireInfo(ModBlocks.palm_fence, 5, 20);
+        fireblock.setFireInfo(ModBlocks.palm_fence_gate, 5, 20);
+        
+        // Set Strippable
+        
+        // Set Compostable
+        
+	}
+    
+    public static void clientInit(FMLClientSetupEvent event)
+	{
+    	BlockColors blockColors = Minecraft.getInstance().getBlockColors();
+        ItemColors itemColors = Minecraft.getInstance().getItemColors();
+        
+        // Foliage Coloring
+        blockColors.register((state, world, pos, tintIndex) ->
+	        world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefault(),
+	        ModBlocks.palm_fronds);
+        
+        // Item Coloring
+        itemColors.register((stack, tintIndex) -> {
+            BlockState BlockState = ((BlockItem)stack.getItem()).getBlock().getDefaultState();
+            return blockColors.getColor(BlockState, null, null, tintIndex); }, 
+        	ModBlocks.palm_fronds);
+	}
+    
 }
