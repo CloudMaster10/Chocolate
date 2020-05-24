@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "chocolate:block/bamboo_slab" },
+        "type=top": { "model": "chocolate:block/bamboo_slab_top" },
+        "type=double": { "model": "chocolate:block/bamboo_block_full" }
+    }
+}

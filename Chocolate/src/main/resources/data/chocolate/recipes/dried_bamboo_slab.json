@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chocolate:dried_bamboo_block"
+    }
+  },
+  "result": {
+    "item": "chocolate:dried_bamboo_slab",
+    "count": 6
+  }
+}

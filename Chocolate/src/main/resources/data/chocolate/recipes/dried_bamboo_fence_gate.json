@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "-#-",
+    "-#-"
+  ],
+  "key": {
+    "#": {
+      "item": "chocolate:dried_bamboo_block"
+    },
+    "-": {
+      "item": "minecraft:bamboo"
+    }
+  },
+  "result": {
+    "item": "chocolate:dried_bamboo_fence_gate"
+  }
+}

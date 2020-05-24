@@ -53,6 +53,15 @@ public class ModBlocks
 	public static Block smooth_soul_sandstone_stairs;
 	
 	public static Block bamboo_block;
+	public static Block bamboo_slab;
+	public static Block bamboo_stairs;
+	public static Block bamboo_fence;
+	public static Block bamboo_fence_gate;
+	public static Block dried_bamboo_block;
+	public static Block dried_bamboo_slab;
+	public static Block dried_bamboo_stairs;
+	public static Block dried_bamboo_fence;
+	public static Block dried_bamboo_fence_gate;
 	
 	public static Block palm_sapling;
 	public static Block palm_fronds;
@@ -89,9 +98,19 @@ public class ModBlocks
 		smooth_soul_sandstone_slab = registerBlock(new SlabBlock(Block.Properties.from(soul_sandstone)), ItemGroup.BUILDING_BLOCKS, "smooth_soul_sandstone_slab");
 		smooth_soul_sandstone_stairs = registerBlock(new StairsBlock(() -> smooth_soul_sandstone.getDefaultState(), Block.Properties.from(soul_sandstone)), ItemGroup.BUILDING_BLOCKS, "smooth_soul_sandstone_stairs");
 		
-		bamboo_block = registerBlock(new RotatedPillarBlock(Block.Properties.create(Material.BAMBOO, MaterialColor.FOLIAGE).hardnessAndResistance(1.0F).sound(SoundType.BAMBOO)), ItemGroup.BUILDING_BLOCKS, "bamboo_block");
+		// Bamboo
+		bamboo_block = registerBlock(new RotatedPillarBlock(Block.Properties.create(Material.BAMBOO, MaterialColor.GRASS).hardnessAndResistance(1.0F).sound(SoundType.BAMBOO)), ItemGroup.BUILDING_BLOCKS, "bamboo_block");
+		bamboo_slab = registerBlock(new SlabBlock(Block.Properties.from(bamboo_block)), ItemGroup.BUILDING_BLOCKS, "bamboo_slab");
+		bamboo_stairs = registerBlock(new StairsBlock(() -> bamboo_block.getDefaultState(), Block.Properties.from(bamboo_block)), ItemGroup.BUILDING_BLOCKS, "bamboo_stairs");
+		bamboo_fence = registerBlock(new FenceBlock(Block.Properties.from(bamboo_block)), ItemGroup.BUILDING_BLOCKS, "bamboo_fence");
+		bamboo_fence_gate = registerBlock(new FenceGateBlock(Block.Properties.from(bamboo_block)), ItemGroup.REDSTONE, "bamboo_fence_gate");
+		dried_bamboo_block = registerBlock(new RotatedPillarBlock(Block.Properties.create(Material.BAMBOO, MaterialColor.SAND).hardnessAndResistance(1.0F).sound(SoundType.BAMBOO)), ItemGroup.BUILDING_BLOCKS, "dried_bamboo_block");
+		dried_bamboo_slab = registerBlock(new SlabBlock(Block.Properties.from(dried_bamboo_block)), ItemGroup.BUILDING_BLOCKS, "dried_bamboo_slab");
+		dried_bamboo_stairs = registerBlock(new StairsBlock(() -> dried_bamboo_block.getDefaultState(), Block.Properties.from(dried_bamboo_block)), ItemGroup.BUILDING_BLOCKS, "dried_bamboo_stairs");
+		dried_bamboo_fence = registerBlock(new FenceBlock(Block.Properties.from(dried_bamboo_block)), ItemGroup.BUILDING_BLOCKS, "dried_bamboo_fence");
+		dried_bamboo_fence_gate = registerBlock(new FenceGateBlock(Block.Properties.from(dried_bamboo_block)), ItemGroup.REDSTONE, "dried_bamboo_fence_gate");
 		
-		// Palm Blocks
+		// Palm
 		palm_sapling = registerBlock(new PalmSaplingBlock(new PalmTree(), Block.Properties.from(Blocks.OAK_SAPLING)) {}, ItemGroup.DECORATIONS, "palm_sapling");
 		palm_fronds = registerBlock(new PalmFrondsBlock(Block.Properties.from(Blocks.OAK_LEAVES)), ItemGroup.DECORATIONS, "palm_fronds");
 		palm_log = registerBlock(new LogBlock(MaterialColor.WHITE_TERRACOTTA, Block.Properties.create(Material.WOOD, MaterialColor.STONE).hardnessAndResistance(2.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "palm_log");

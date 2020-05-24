@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "chocolate:block/dried_bamboo_block",
+        "top": "chocolate:block/dried_bamboo_block",
+        "side": "chocolate:block/dried_bamboo_block"
+    }
+}

@@ -1,6 +1,4 @@
 {
-	
-	
 	"block.chocolate.soul_sandstone": "Soul Sandstone",
 	"block.chocolate.soul_sandstone_slab": "Soul Sandstone Slab",
 	"block.chocolate.soul_sandstone_stairs": "Soul Sandstone Stairs",
@@ -13,6 +11,15 @@
 	"block.chocolate.smooth_soul_sandstone_stairs": "Smooth Soul Sandstone Stairs",
 	
 	"block.chocolate.bamboo_block": "Bamboo Block",
+	"block.chocolate.bamboo_slab": "Bamboo Slab",
+	"block.chocolate.bamboo_stairs": "Bamboo Stairs",
+	"block.chocolate.bamboo_fence": "Bamboo Fence",
+	"block.chocolate.bamboo_fence_gate": "Bamboo Fence Gate",
+	"block.chocolate.dried_bamboo_block": "Dried Bamboo Block",
+	"block.chocolate.dried_bamboo_slab": "Dried Bamboo Slab",
+	"block.chocolate.dried_bamboo_stairs": "Dried Bamboo Stairs",
+	"block.chocolate.dried_bamboo_fence": "Dried Bamboo Fence",
+	"block.chocolate.dried_bamboo_fence_gate": "Dried Bamboo Fence Gate",
 
 	"block.chocolate.palm_sapling": "Palm Sapling",
 	"block.chocolate.palm_fronds": "Palm Fronds",
