@@ -1,0 +1,7 @@
+{
+    "parent": "block/template_glass_pane_noside_alt",
+    "textures": {
+        "edge": "chocolate:block/framed_glass_pane_edge",
+        "pane": "chocolate:block/framed_blue_stained_glass"
+    }
+}

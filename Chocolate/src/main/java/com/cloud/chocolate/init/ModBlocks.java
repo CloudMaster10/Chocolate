@@ -1,8 +1,8 @@
 package com.cloud.chocolate.init;
 
 import com.cloud.chocolate.Chocolate;
-import com.cloud.chocolate.block.PalmSaplingBlock;
 import com.cloud.chocolate.block.PalmFrondsBlock;
+import com.cloud.chocolate.block.PalmSaplingBlock;
 import com.cloud.chocolate.block.trees.PalmTree;
 
 import net.minecraft.block.Block;
@@ -11,11 +11,15 @@ import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.block.GlassBlock;
 import net.minecraft.block.LogBlock;
+import net.minecraft.block.PaneBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.StainedGlassBlock;
+import net.minecraft.block.StainedGlassPaneBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.block.WallBlock;
@@ -25,6 +29,7 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.api.distmarker.Dist;
@@ -82,6 +87,42 @@ public class ModBlocks
 	//public static Block palm_wall_sign;
 	public static Block potted_palm_sapling;
 	
+	public static Block framed_glass;
+	public static Block framed_white_stained_glass;
+	public static Block framed_orange_stained_glass;
+	public static Block framed_magenta_stained_glass;
+	public static Block framed_light_blue_stained_glass;
+	public static Block framed_yellow_stained_glass;
+	public static Block framed_lime_stained_glass;
+	public static Block framed_pink_stained_glass;
+	public static Block framed_gray_stained_glass;
+	public static Block framed_light_gray_stained_glass;
+	public static Block framed_cyan_stained_glass;
+	public static Block framed_purple_stained_glass;
+	public static Block framed_blue_stained_glass;
+	public static Block framed_brown_stained_glass;
+	public static Block framed_green_stained_glass;
+	public static Block framed_red_stained_glass;
+	public static Block framed_black_stained_glass;
+	public static Block framed_glass_pane;
+	public static Block framed_white_stained_glass_pane;
+	public static Block framed_orange_stained_glass_pane;
+	public static Block framed_magenta_stained_glass_pane;
+	public static Block framed_light_blue_stained_glass_pane;
+	public static Block framed_yellow_stained_glass_pane;
+	public static Block framed_lime_stained_glass_pane;
+	public static Block framed_pink_stained_glass_pane;
+	public static Block framed_gray_stained_glass_pane;
+	public static Block framed_light_gray_stained_glass_pane;
+	public static Block framed_cyan_stained_glass_pane;
+	public static Block framed_purple_stained_glass_pane;
+	public static Block framed_blue_stained_glass_pane;
+	public static Block framed_brown_stained_glass_pane;
+	public static Block framed_green_stained_glass_pane;
+	public static Block framed_red_stained_glass_pane;
+	public static Block framed_black_stained_glass_pane;
+	
+	
 	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -129,6 +170,42 @@ public class ModBlocks
 		potted_palm_sapling = registerBlock(new FlowerPotBlock(palm_sapling, Block.Properties.from(Blocks.FLOWER_POT)), "potted_palm_sapling");
 		//potted_palm_sapling = registerBlock(new FlowerPotBlock(null, () -> palm_sapling, Block.Properties.from(Blocks.FLOWER_POT)), "potted_palm_sapling");
 		
+		// Framed Glass
+		framed_glass = registerBlock(new GlassBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_glass");
+		framed_white_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.WHITE, Block.Properties.create(Material.GLASS, DyeColor.WHITE).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_white_stained_glass");
+		framed_orange_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.ORANGE, Block.Properties.create(Material.GLASS, DyeColor.ORANGE).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_orange_stained_glass");
+		framed_magenta_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.MAGENTA, Block.Properties.create(Material.GLASS, DyeColor.MAGENTA).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_magenta_stained_glass");
+		framed_light_blue_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.LIGHT_BLUE, Block.Properties.create(Material.GLASS, DyeColor.LIGHT_BLUE).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_light_blue_stained_glass");
+		framed_yellow_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.YELLOW, Block.Properties.create(Material.GLASS, DyeColor.YELLOW).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_yellow_stained_glass");
+		framed_lime_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.LIME, Block.Properties.create(Material.GLASS, DyeColor.LIME).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_lime_stained_glass");
+		framed_pink_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.PINK, Block.Properties.create(Material.GLASS, DyeColor.PINK).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_pink_stained_glass");
+		framed_gray_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.GRAY, Block.Properties.create(Material.GLASS, DyeColor.GRAY).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_gray_stained_glass");
+		framed_light_gray_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.LIGHT_GRAY, Block.Properties.create(Material.GLASS, DyeColor.LIGHT_GRAY).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_light_gray_stained_glass");
+		framed_cyan_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.CYAN, Block.Properties.create(Material.GLASS, DyeColor.CYAN).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_cyan_stained_glass");
+		framed_purple_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.PURPLE, Block.Properties.create(Material.GLASS, DyeColor.PURPLE).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_purple_stained_glass");
+		framed_blue_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.BLUE, Block.Properties.create(Material.GLASS, DyeColor.BLUE).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_blue_stained_glass");
+		framed_brown_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.BROWN, Block.Properties.create(Material.GLASS, DyeColor.BROWN).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_brown_stained_glass");
+		framed_green_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.GREEN, Block.Properties.create(Material.GLASS, DyeColor.GREEN).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_green_stained_glass");
+		framed_red_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.RED, Block.Properties.create(Material.GLASS, DyeColor.RED).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_red_stained_glass");
+		framed_black_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.BLACK, Block.Properties.create(Material.GLASS, DyeColor.BLACK).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_black_stained_glass");
+		framed_glass_pane = registerBlock(new PaneBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()) {}, ItemGroup.DECORATIONS, "framed_glass_pane");
+		framed_white_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.WHITE, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_white_stained_glass_pane");
+		framed_orange_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.ORANGE, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_orange_stained_glass_pane");
+		framed_magenta_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.MAGENTA, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_magenta_stained_glass_pane");
+		framed_light_blue_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.LIGHT_BLUE, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_light_blue_stained_glass_pane");
+		framed_yellow_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.YELLOW, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_yellow_stained_glass_pane");
+		framed_lime_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.LIME, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_lime_stained_glass_pane");
+		framed_pink_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.PINK, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_pink_stained_glass_pane");
+		framed_gray_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.GRAY, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_gray_stained_glass_pane");
+		framed_light_gray_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.LIGHT_GRAY, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_light_gray_stained_glass_pane");
+		framed_cyan_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.CYAN, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_cyan_stained_glass_pane");
+		framed_purple_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.PURPLE, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_purple_stained_glass_pane");
+		framed_blue_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.BLUE, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_blue_stained_glass_pane");
+		framed_brown_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.BROWN, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_brown_stained_glass_pane");
+		framed_green_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.GREEN, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_green_stained_glass_pane");
+		framed_red_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.RED, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_red_stained_glass_pane");
+		framed_black_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.BLACK, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_black_stained_glass_pane");
+		
 		if (FMLEnvironment.dist == Dist.CLIENT)
 		{
 			RenderTypeLookup.setRenderLayer(palm_sapling, RenderType.getCutout());
@@ -136,6 +213,41 @@ public class ModBlocks
 			RenderTypeLookup.setRenderLayer(palm_door, RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(palm_trapdoor, RenderType.getCutout());
 			RenderTypeLookup.setRenderLayer(potted_palm_sapling, RenderType.getCutout());
+			
+			RenderTypeLookup.setRenderLayer(framed_glass, RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(framed_white_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_orange_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_magenta_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_light_blue_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_yellow_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_lime_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_pink_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_gray_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_light_gray_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_cyan_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_purple_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_blue_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_brown_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_green_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_red_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_black_stained_glass, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_glass_pane, RenderType.getCutoutMipped());
+			RenderTypeLookup.setRenderLayer(framed_white_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_orange_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_magenta_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_light_blue_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_yellow_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_lime_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_pink_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_gray_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_light_gray_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_cyan_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_purple_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_blue_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_brown_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_green_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_red_stained_glass_pane, RenderType.getTranslucent());
+			RenderTypeLookup.setRenderLayer(framed_black_stained_glass_pane, RenderType.getTranslucent());
 		}
 	}
 	
