@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stained_glass_pane",
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chocolate:framed_glass_pane"
+    },
+    "X": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "result": {
+    "item": "chocolate:framed_black_stained_glass_pane",
+    "count": 8
+  }
+}
