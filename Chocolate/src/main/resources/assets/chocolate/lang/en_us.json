@@ -71,5 +71,12 @@
 	"block.chocolate.framed_brown_stained_glass_pane": "Framed Brown Stained Glass Pane",
 	"block.chocolate.framed_green_stained_glass_pane": "Framed Green Stained Glass Pane",
 	"block.chocolate.framed_red_stained_glass_pane": "Framed Red Stained Glass Pane",
-	"block.chocolate.framed_black_stained_glass_pane": "Framed Black Stained Glass Pane"
+	"block.chocolate.framed_black_stained_glass_pane": "Framed Black Stained Glass Pane",
+	
+	"enchantment.chocolate.stomping": "Stomping",
+	
+	"death.attack.stomping": "%1$s was stomped to death",
+	"death.attack.stomping.player": "%1$s was crushed under %2$s's stomp",
+	"death.attack.stomping.player.assist": "%1$s was was stomped to death whilst fighting %2$s",
+	"death.attack.stomping.player.item": "%1$s was crushed under %2$s's stomp using %3$s"
 }
