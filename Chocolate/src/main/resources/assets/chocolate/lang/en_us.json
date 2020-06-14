@@ -74,6 +74,9 @@
 	"block.chocolate.framed_black_stained_glass_pane": "Framed Black Stained Glass Pane",
 	
 	"enchantment.chocolate.stomping": "Stomping",
+	"enchantment.chocolate.sprouting": "Sprouting",
+	"enchantment.chocolate.cultivator": "Cultivator",
+	"enchantment.chocolate.scythe": "Scythe",
 	
 	"death.attack.stomping": "%1$s was stomped to death",
 	"death.attack.stomping.player": "%1$s was crushed under %2$s's stomp",
