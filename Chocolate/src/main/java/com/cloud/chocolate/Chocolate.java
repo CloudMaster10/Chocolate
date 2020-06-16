@@ -2,13 +2,16 @@ package com.cloud.chocolate;
 
 import com.cloud.chocolate.init.ModBlocks;
 import com.cloud.chocolate.world.gen.feature.ModFeatures;
+import com.google.common.collect.Maps;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.FireBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.world.FoliageColors;
 import net.minecraft.world.biome.Biome;
@@ -20,6 +23,7 @@ import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -37,14 +41,13 @@ public class Chocolate
 
     public Chocolate()
     {
-    	instance = this;
+    	final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
     	
-    	// Register for server and other game events
+    	modEventBus.addListener(Chocolate::commonInit);
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> modEventBus.addListener(Chocolate::clientInit));
+
+    	instance = this;
         MinecraftForge.EVENT_BUS.register(this);
-        
-        
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(Chocolate::commonInit);
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(Chocolate::clientInit));
     }
     
     public static void commonInit(FMLCommonSetupEvent event)
@@ -72,8 +75,12 @@ public class Chocolate
         fireblock.setFireInfo(ModBlocks.palm_fence_gate, 5, 20);
         
         // Set Strippable
+        AxeItem.BLOCK_STRIPPING_MAP.put(ModBlocks.palm_log, ModBlocks.stripped_palm_log);
+        AxeItem.BLOCK_STRIPPING_MAP.put(ModBlocks.palm_wood, ModBlocks.stripped_palm_wood);
         
         // Set Compostable
+        ComposterBlock.CHANCES.put(ModBlocks.palm_sapling, 0.3F);
+        ComposterBlock.CHANCES.put(ModBlocks.palm_fronds, 0.3F);
         
 	}
     

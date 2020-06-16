@@ -123,7 +123,6 @@ public class ModBlocks
 	public static Block framed_black_stained_glass_pane;
 	
 	
-	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
 	{
@@ -163,10 +162,10 @@ public class ModBlocks
 		palm_stairs = registerBlock(new StairsBlock(() -> palm_planks.getDefaultState(), Block.Properties.from(palm_planks)), ItemGroup.BUILDING_BLOCKS, "palm_stairs");
 		palm_fence = registerBlock(new FenceBlock(Block.Properties.from(palm_planks)), ItemGroup.BUILDING_BLOCKS, "palm_fence");
 		palm_fence_gate = registerBlock(new FenceGateBlock(Block.Properties.from(palm_planks)), ItemGroup.REDSTONE, "palm_fence_gate");
-		palm_door = registerBlock(new DoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()) {}, ItemGroup.REDSTONE, "palm_door");
-		palm_trapdoor = registerBlock(new TrapDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()) {}, ItemGroup.REDSTONE, "palm_trapdoor");
-		palm_button = registerBlock(new WoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)) {}, ItemGroup.REDSTONE, "palm_button");
-		palm_pressure_plate = registerBlock(new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)) {}, ItemGroup.REDSTONE, "palm_pressure_plate");
+		palm_door = registerBlock(new DoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()), ItemGroup.REDSTONE, "palm_door");
+		palm_trapdoor = registerBlock(new TrapDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()), ItemGroup.REDSTONE, "palm_trapdoor");
+		palm_button = registerBlock(new WoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)), ItemGroup.REDSTONE, "palm_button");
+		palm_pressure_plate = registerBlock(new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)), ItemGroup.REDSTONE, "palm_pressure_plate");
 		potted_palm_sapling = registerBlock(new FlowerPotBlock(palm_sapling, Block.Properties.from(Blocks.FLOWER_POT)), "potted_palm_sapling");
 		//potted_palm_sapling = registerBlock(new FlowerPotBlock(null, () -> palm_sapling, Block.Properties.from(Blocks.FLOWER_POT)), "potted_palm_sapling");
 		
