@@ -1,6 +1,7 @@
 package com.cloud.chocolate.init;
 
 import com.cloud.chocolate.Chocolate;
+import com.cloud.chocolate.block.CandleBlock;
 import com.cloud.chocolate.block.PalmFrondsBlock;
 import com.cloud.chocolate.block.PalmSaplingBlock;
 import com.cloud.chocolate.block.trees.PalmTree;
@@ -122,6 +123,8 @@ public class ModBlocks
 	public static Block framed_red_stained_glass_pane;
 	public static Block framed_black_stained_glass_pane;
 	
+	public static Block candle;
+	
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -204,6 +207,9 @@ public class ModBlocks
 		framed_green_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.GREEN, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_green_stained_glass_pane");
 		framed_red_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.RED, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_red_stained_glass_pane");
 		framed_black_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.BLACK, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_black_stained_glass_pane");
+		
+		// Candle
+		candle = registerBlock(new CandleBlock(Block.Properties.create(Material.CLAY, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(0.2F).lightValue(7).sound(SoundType.CLOTH)), ItemGroup.DECORATIONS, "candle");
 		
 		if (FMLEnvironment.dist == Dist.CLIENT)
 		{

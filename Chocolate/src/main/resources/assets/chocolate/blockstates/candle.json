@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "candles=1": [
+            { "model": "chocolate:block/candle_one" }
+        ],
+        "candles=2": [
+            { "model": "chocolate:block/candle_two" }
+        ],
+        "candles=3": [
+            { "model": "chocolate:block/candle_three" }
+        ],
+        "candles=4": [
+            { "model": "chocolate:block/candle_four" }
+        ],
+        "candles=5": [
+            { "model": "chocolate:block/candle_five" }
+        ]
+	}
+}

@@ -75,8 +75,8 @@ public class Chocolate
         fireblock.setFireInfo(ModBlocks.palm_fence_gate, 5, 20);
         
         // Set Strippable
-        AxeItem.BLOCK_STRIPPING_MAP.put(ModBlocks.palm_log, ModBlocks.stripped_palm_log);
-        AxeItem.BLOCK_STRIPPING_MAP.put(ModBlocks.palm_wood, ModBlocks.stripped_palm_wood);
+        //AxeItem.BLOCK_STRIPPING_MAP.put(ModBlocks.palm_log, ModBlocks.stripped_palm_log);
+        //AxeItem.BLOCK_STRIPPING_MAP.put(ModBlocks.palm_wood, ModBlocks.stripped_palm_wood);
         
         // Set Compostable
         ComposterBlock.CHANCES.put(ModBlocks.palm_sapling, 0.3F);
