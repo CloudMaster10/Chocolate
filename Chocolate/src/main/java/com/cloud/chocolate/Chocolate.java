@@ -1,8 +1,8 @@
 package com.cloud.chocolate;
 
 import com.cloud.chocolate.init.ModBlocks;
+import com.cloud.chocolate.world.biome.ModDefaultBiomeFeatures;
 import com.cloud.chocolate.world.gen.feature.ModFeatures;
-import com.google.common.collect.Maps;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,9 +11,11 @@ import net.minecraft.block.FireBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.FoliageColors;
+import net.minecraft.world.GrassColors;
+import net.minecraft.world.ILightReader;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraft.world.biome.Biomes;
@@ -53,14 +55,74 @@ public class Chocolate
     public static void commonInit(FMLCommonSetupEvent event)
 	{	
     	// Place Features
-		for (Biome biomeIn : ForgeRegistries.BIOMES.getValues())
-		{
-			if (biomeIn == Biomes.BEACH)
-			{
-				biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, ModFeatures.PALM_TREE.withConfiguration(DefaultBiomeFeatures.OAK_TREE_CONFIG).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.35F, 2))));
-			}
-		}
-		
+    	ModDefaultBiomeFeatures.addPalmTrees(Biomes.BEACH);
+    	
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.PLAINS, 10);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.DESERT, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.MOUNTAINS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.FOREST, 4);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.TAIGA, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SWAMP, 10);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.RIVER, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.FROZEN_OCEAN, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.FROZEN_RIVER, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SNOWY_TUNDRA, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SNOWY_MOUNTAINS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.BEACH, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.DESERT_HILLS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.WOODED_HILLS, 4);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.TAIGA_HILLS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.MOUNTAIN_EDGE, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.JUNGLE, 50);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.JUNGLE_HILLS, 50);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.JUNGLE_EDGE, 50);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.DEEP_OCEAN, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.STONE_SHORE, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SNOWY_BEACH, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.BIRCH_FOREST, 4);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.BIRCH_FOREST_HILLS, 4);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.DARK_FOREST, 4);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SNOWY_TAIGA, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SNOWY_TAIGA_HILLS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.GIANT_TREE_TAIGA, 14);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.GIANT_TREE_TAIGA_HILLS, 14);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.WOODED_MOUNTAINS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SAVANNA, 40);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SAVANNA_PLATEAU, 40);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.BADLANDS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.WOODED_BADLANDS_PLATEAU, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.BADLANDS_PLATEAU, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.WARM_OCEAN, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.LUKEWARM_OCEAN, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.COLD_OCEAN, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.DEEP_WARM_OCEAN, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.DEEP_LUKEWARM_OCEAN, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.DEEP_COLD_OCEAN, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.DEEP_FROZEN_OCEAN, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SUNFLOWER_PLAINS, 10);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.DESERT_LAKES, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.GRAVELLY_MOUNTAINS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.FLOWER_FOREST, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.TAIGA_MOUNTAINS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SWAMP_HILLS, 10);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.ICE_SPIKES, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.MODIFIED_JUNGLE, 50);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.MODIFIED_JUNGLE_EDGE, 50);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.TALL_BIRCH_FOREST, 4);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.TALL_BIRCH_HILLS, 4);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.DARK_FOREST_HILLS, 4);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SNOWY_TAIGA_MOUNTAINS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.GIANT_SPRUCE_TAIGA, 14);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.GIANT_SPRUCE_TAIGA_HILLS, 14);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.MODIFIED_GRAVELLY_MOUNTAINS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SHATTERED_SAVANNA, 40);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.SHATTERED_SAVANNA_PLATEAU, 40);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.ERODED_BADLANDS, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.MODIFIED_WOODED_BADLANDS_PLATEAU, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.MODIFIED_BADLANDS_PLATEAU, 2);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.BAMBOO_JUNGLE, 50);
+    	ModDefaultBiomeFeatures.addShortGrass(Biomes.BAMBOO_JUNGLE_HILLS, 50);
+    	
 		// Set Flammable
 		FireBlock fireblock = (FireBlock)Blocks.FIRE;
         fireblock.setFireInfo(ModBlocks.palm_fronds, 30, 60);
@@ -86,19 +148,24 @@ public class Chocolate
     
     public static void clientInit(FMLClientSetupEvent event)
 	{
+    	// Foliage Coloring
     	BlockColors blockColors = Minecraft.getInstance().getBlockColors();
         ItemColors itemColors = Minecraft.getInstance().getItemColors();
         
-        // Foliage Coloring
+        // Block Coloring
         blockColors.register((state, world, pos, tintIndex) ->
 	        world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefault(),
 	        ModBlocks.palm_fronds);
+        
+        blockColors.register((state, world, pos, tintIndex) ->
+        	world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.get(0.5D, 1.0D),
+        	ModBlocks.short_grass);
         
         // Item Coloring
         itemColors.register((stack, tintIndex) -> {
             BlockState BlockState = ((BlockItem)stack.getItem()).getBlock().getDefaultState();
             return blockColors.getColor(BlockState, null, null, tintIndex); }, 
-        	ModBlocks.palm_fronds);
+        		ModBlocks.palm_fronds, ModBlocks.short_grass);
 	}
     
 }

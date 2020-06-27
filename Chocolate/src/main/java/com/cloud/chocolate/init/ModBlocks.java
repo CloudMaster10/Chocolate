@@ -4,6 +4,7 @@ import com.cloud.chocolate.Chocolate;
 import com.cloud.chocolate.block.CandleBlock;
 import com.cloud.chocolate.block.PalmFrondsBlock;
 import com.cloud.chocolate.block.PalmSaplingBlock;
+import com.cloud.chocolate.block.ShortGrassBlock;
 import com.cloud.chocolate.block.trees.PalmTree;
 
 import net.minecraft.block.Block;
@@ -125,6 +126,8 @@ public class ModBlocks
 	
 	public static Block candle;
 	
+	public static Block short_grass;
+	
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -211,6 +214,9 @@ public class ModBlocks
 		// Candle
 		candle = registerBlock(new CandleBlock(Block.Properties.create(Material.CLAY, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(0.2F).lightValue(7).sound(SoundType.CLOTH)), ItemGroup.DECORATIONS, "candle");
 		
+		// Short Grass
+		short_grass = registerBlock(new ShortGrassBlock(Block.Properties.from(Blocks.GRASS)), ItemGroup.DECORATIONS, "short_grass");
+		
 		if (FMLEnvironment.dist == Dist.CLIENT)
 		{
 			RenderTypeLookup.setRenderLayer(palm_sapling, RenderType.getCutout());
@@ -253,6 +259,8 @@ public class ModBlocks
 			RenderTypeLookup.setRenderLayer(framed_green_stained_glass_pane, RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(framed_red_stained_glass_pane, RenderType.getTranslucent());
 			RenderTypeLookup.setRenderLayer(framed_black_stained_glass_pane, RenderType.getTranslucent());
+			
+			RenderTypeLookup.setRenderLayer(short_grass, RenderType.getCutout());
 		}
 	}
 	
