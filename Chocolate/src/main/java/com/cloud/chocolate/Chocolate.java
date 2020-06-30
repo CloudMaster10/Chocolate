@@ -1,6 +1,7 @@
 package com.cloud.chocolate;
 
 import com.cloud.chocolate.init.ModBlocks;
+import com.cloud.chocolate.init.ModPotions;
 import com.cloud.chocolate.world.biome.ModDefaultBiomeFeatures;
 import com.cloud.chocolate.world.gen.feature.ModFeatures;
 
@@ -12,6 +13,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Items;
+import net.minecraft.potion.PotionBrewing;
+import net.minecraft.potion.Potions;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.FoliageColors;
 import net.minecraft.world.GrassColors;
@@ -144,6 +148,19 @@ public class Chocolate
         ComposterBlock.CHANCES.put(ModBlocks.palm_sapling, 0.3F);
         ComposterBlock.CHANCES.put(ModBlocks.palm_fronds, 0.3F);
         
+        // Create Brewing Recipies
+        PotionBrewing.addMix(Potions.AWKWARD, Items.NAUTILUS_SHELL, ModPotions.haste);
+        PotionBrewing.addMix(ModPotions.haste, Items.REDSTONE, ModPotions.long_haste);
+        PotionBrewing.addMix(ModPotions.haste, Items.GLOWSTONE_DUST, ModPotions.strong_haste);
+        PotionBrewing.addMix(ModPotions.haste, Items.FERMENTED_SPIDER_EYE, ModPotions.mining_fatigue);
+        PotionBrewing.addMix(ModPotions.long_haste, Items.FERMENTED_SPIDER_EYE, ModPotions.long_mining_fatigue);
+        PotionBrewing.addMix(ModPotions.strong_haste, Items.FERMENTED_SPIDER_EYE, ModPotions.strong_mining_fatigue);
+        PotionBrewing.addMix(Potions.AWKWARD, Items.SHULKER_SHELL, ModPotions.resistance);
+        PotionBrewing.addMix(ModPotions.resistance, Items.REDSTONE, ModPotions.long_resistance);
+        PotionBrewing.addMix(ModPotions.resistance, Items.GLOWSTONE_DUST, ModPotions.strong_resistance);
+        PotionBrewing.addMix(Potions.AWKWARD, Items.WITHER_ROSE, ModPotions.wither);
+        PotionBrewing.addMix(ModPotions.wither, Items.REDSTONE, ModPotions.long_wither);
+        PotionBrewing.addMix(ModPotions.wither, Items.GLOWSTONE_DUST, ModPotions.strong_wither);
 	}
     
     public static void clientInit(FMLClientSetupEvent event)
