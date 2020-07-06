@@ -1,9 +1,9 @@
 package com.cloud.chocolate;
 
 import com.cloud.chocolate.init.ModBlocks;
+import com.cloud.chocolate.init.ModEntities;
 import com.cloud.chocolate.init.ModPotions;
 import com.cloud.chocolate.world.biome.ModDefaultBiomeFeatures;
-import com.cloud.chocolate.world.gen.feature.ModFeatures;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -16,17 +16,10 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Items;
 import net.minecraft.potion.PotionBrewing;
 import net.minecraft.potion.Potions;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.FoliageColors;
 import net.minecraft.world.GrassColors;
-import net.minecraft.world.ILightReader;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -35,7 +28,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Chocolate.MOD_ID)
@@ -165,6 +157,8 @@ public class Chocolate
     
     public static void clientInit(FMLClientSetupEvent event)
 	{
+    	ModEntities.registerRendering();
+    	
     	// Foliage Coloring
     	BlockColors blockColors = Minecraft.getInstance().getBlockColors();
         ItemColors itemColors = Minecraft.getInstance().getItemColors();
