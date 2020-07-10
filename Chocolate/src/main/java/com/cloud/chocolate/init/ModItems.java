@@ -6,7 +6,6 @@ import com.cloud.chocolate.item.ModBoatItem;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.SignItem;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,7 +20,7 @@ public class ModItems
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
 	{
-        //palm_sign = registerItem(new SignItem((new Item.Properties()).maxStackSize(16).group(ItemGroup.DECORATIONS), ModBlocks.palm_standing_sign, ModBlocks.palm_wall_sign), "palm_sign");
+        //palm_sign = registerItem(new ModSignItem((new Item.Properties()).maxStackSize(16).group(ItemGroup.DECORATIONS), ModBlocks.palm_standing_sign, ModBlocks.palm_wall_sign), "palm_sign_item");
     	palm_boat = registerItem(new ModBoatItem(ModBoatEntity.Type.PALM, (new Item.Properties()).maxStackSize(1).group(ItemGroup.TRANSPORTATION)), "palm_boat");
 	}
     

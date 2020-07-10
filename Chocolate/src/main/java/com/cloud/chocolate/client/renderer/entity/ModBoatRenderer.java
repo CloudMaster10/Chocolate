@@ -1,5 +1,6 @@
 package com.cloud.chocolate.client.renderer.entity;
 
+import com.cloud.chocolate.Chocolate;
 import com.cloud.chocolate.client.renderer.entity.model.ModBoatModel;
 import com.cloud.chocolate.entity.item.ModBoatEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -21,7 +22,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class ModBoatRenderer extends EntityRenderer<ModBoatEntity>
 {
 	private static final ResourceLocation[] BOAT_TEXTURES = new ResourceLocation[] {
-			new ResourceLocation("chocolate:textures/entity/boat/palm.png") };
+			new ResourceLocation(Chocolate.MOD_ID, "textures/entity/boat/palm.png") };
 	protected final ModBoatModel modelBoat = new ModBoatModel();
 
 	public ModBoatRenderer(EntityRendererManager renderManagerIn)

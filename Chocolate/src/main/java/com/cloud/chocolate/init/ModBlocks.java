@@ -2,10 +2,14 @@ package com.cloud.chocolate.init;
 
 import com.cloud.chocolate.Chocolate;
 import com.cloud.chocolate.block.CandleBlock;
+import com.cloud.chocolate.block.ModStandingSignBlock;
+import com.cloud.chocolate.block.ModWallSignBlock;
 import com.cloud.chocolate.block.PalmFrondsBlock;
 import com.cloud.chocolate.block.PalmSaplingBlock;
 import com.cloud.chocolate.block.ShortGrassBlock;
 import com.cloud.chocolate.block.trees.PalmTree;
+import com.cloud.chocolate.item.ModSignItem;
+import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -26,6 +30,7 @@ import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.block.WallBlock;
 import net.minecraft.block.WoodButtonBlock;
+import net.minecraft.block.WoodType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.renderer.RenderType;
@@ -34,6 +39,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
@@ -41,9 +47,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ObjectHolder;
 
-@ObjectHolder(Chocolate.MOD_ID)
+//@ObjectHolder(Chocolate.MOD_ID)
 @Mod.EventBusSubscriber(modid = Chocolate.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks
 {	
@@ -85,7 +90,8 @@ public class ModBlocks
 	public static Block palm_trapdoor;
 	public static Block palm_button;
 	public static Block palm_pressure_plate;
-	//public static Block palm_sign;
+	public static Pair<ModStandingSignBlock, ModWallSignBlock> palm_sign;
+	//public static Block palm_standing_sign;
 	//public static Block palm_wall_sign;
 	public static Block potted_palm_sapling;
 	
@@ -172,6 +178,10 @@ public class ModBlocks
 		palm_trapdoor = registerBlock(new TrapDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()), ItemGroup.REDSTONE, "palm_trapdoor");
 		palm_button = registerBlock(new WoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)), ItemGroup.REDSTONE, "palm_button");
 		palm_pressure_plate = registerBlock(new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)), ItemGroup.REDSTONE, "palm_pressure_plate");
+		palm_sign = registerSignBlock(MaterialColor.WHITE_TERRACOTTA, "palm");
+		//palm_standing_sign = registerBlock(new ModStandingSignBlock(Block.Properties.from(Blocks.OAK_SIGN), "palm"), "palm_sign");
+		//palm_wall_sign = registerBlock(new ModWallSignBlock(Block.Properties.from(Blocks.OAK_WALL_SIGN), "palm"), "palm_wall_sign");
+		
 		potted_palm_sapling = registerBlock(new FlowerPotBlock(palm_sapling, Block.Properties.from(Blocks.FLOWER_POT)), "potted_palm_sapling");
 		//potted_palm_sapling = registerBlock(new FlowerPotBlock(null, () -> palm_sapling, Block.Properties.from(Blocks.FLOWER_POT)), "potted_palm_sapling");
 		
@@ -307,4 +317,21 @@ public class ModBlocks
         return block;
     }
 	
+	public static Pair<ModStandingSignBlock, ModWallSignBlock> registerSignBlock(MaterialColor color, String type)
+	{
+		ModStandingSignBlock standing = new ModStandingSignBlock(Block.Properties.from(Blocks.OAK_SIGN), type);
+		ModWallSignBlock wall = new ModWallSignBlock(Block.Properties.from(Blocks.OAK_WALL_SIGN), type);
+		
+		BlockItem itemBlock = new ModSignItem(new Item.Properties().maxStackSize(16).group(ItemGroup.DECORATIONS), standing, wall);
+		
+		standing.setRegistryName(type + "_sign");
+		wall.setRegistryName(type + "_wall_sign");
+		itemBlock.setRegistryName(type + "_sign");
+		
+		ForgeRegistries.BLOCKS.register(standing);
+		ForgeRegistries.BLOCKS.register(wall);
+        ForgeRegistries.ITEMS.register(itemBlock);
+		
+		return Pair.of(standing, wall);
+	}
 }

@@ -1,8 +1,10 @@
 package com.cloud.chocolate;
 
+import com.cloud.chocolate.client.renderer.tileentity.ModSignTileEntityRenderer;
 import com.cloud.chocolate.init.ModBlocks;
 import com.cloud.chocolate.init.ModEntities;
 import com.cloud.chocolate.init.ModPotions;
+import com.cloud.chocolate.init.ModTileEntities;
 import com.cloud.chocolate.world.biome.ModDefaultBiomeFeatures;
 
 import net.minecraft.block.BlockState;
@@ -24,12 +26,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(Chocolate.MOD_ID)
 public class Chocolate
 {
@@ -43,9 +45,12 @@ public class Chocolate
     	
     	modEventBus.addListener(Chocolate::commonInit);
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> modEventBus.addListener(Chocolate::clientInit));
-
+        
     	instance = this;
         MinecraftForge.EVENT_BUS.register(this);
+        
+        // Testing
+        ModTileEntities.TILE_ENTITIES.register(modEventBus);
     }
     
     public static void commonInit(FMLCommonSetupEvent event)
@@ -157,7 +162,12 @@ public class Chocolate
     
     public static void clientInit(FMLClientSetupEvent event)
 	{
+    	// Rendering Set-up
     	ModEntities.registerRendering();
+    	ModTileEntities.registerRendering();
+    	
+    	//ClientRegistry.bindTileEntityRenderer(ModTileEntities.sign, ModSignTileEntityRenderer::new);
+    	ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN.get(), ModSignTileEntityRenderer::new);
     	
     	// Foliage Coloring
     	BlockColors blockColors = Minecraft.getInstance().getBlockColors();
