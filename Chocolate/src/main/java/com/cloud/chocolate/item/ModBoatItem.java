@@ -69,7 +69,7 @@ public class ModBoatItem extends Item
 				ModBoatEntity boat = new ModBoatEntity(worldIn, raytraceresult.getHitVec().x, raytraceresult.getHitVec().y, raytraceresult.getHitVec().z);
 				boat.setModBoatType(this.type);
 				boat.rotationYaw = playerIn.rotationYaw;
-				if (!worldIn.func_226665_a__(boat, boat.getBoundingBox().grow(-0.1D)))
+				if (!worldIn.hasNoCollisions(boat, boat.getBoundingBox().grow(-0.1D)))
 				{
 					return ActionResult.resultFail(itemstack);
 				}

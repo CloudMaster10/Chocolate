@@ -831,7 +831,7 @@ public class ModBoatEntity extends BoatEntity
 	@Override
 	public boolean processInitialInteract(PlayerEntity player, Hand hand)
 	{
-		if (player.func_226563_dT_())
+		if (player.isSecondaryUseActive())
 		{
 			return false;
 		}

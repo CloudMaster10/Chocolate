@@ -45,7 +45,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 	}*/
     
 	@Override
-	protected boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set1, Set<BlockPos> set2, MutableBoundingBox box, TreeFeatureConfig config)
+	protected boolean place(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set1, Set<BlockPos> set2, MutableBoundingBox box, TreeFeatureConfig config)
 	{
 		int treeHeight = this.minTreeHeight;
 		boolean flag = true;
@@ -71,7 +71,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 					{
 						if (j >= 0 && j < worldIn.getMaxHeight())
 						{
-							if (!func_214587_a(worldIn, blockpos$Mutable.setPos(l, j, i1)))
+							if (!canBeReplacedByLogs(worldIn, blockpos$Mutable.setPos(l, j, i1)))
 							{
 								flag = false;
 							}
@@ -107,7 +107,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 					}
 					if (isAirOrLeaves(worldIn, position) || isAir(worldIn, position))
 					{
-						this.func_227217_a_(worldIn, position, this.trunk, box);
+						this.setBlockState(worldIn, position, this.trunk, box);
 						set1.add(position.toImmutable());
 					}
 				}
@@ -140,7 +140,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 	void placeLeaves(int x, int y, int z, IWorldGenerationReader worldIn, BlockPos position, MutableBoundingBox box, boolean forceUpdate) {
 		BlockPos blockpos = new BlockPos(position.getX() + x, position.getY() + y, position.getZ() + z);
 		if (isAirOrLeaves(worldIn, blockpos) || isAir(worldIn, blockpos)) {
-			this.func_227217_a_(worldIn, blockpos, this.leaf, box);
+			this.setBlockState(worldIn, blockpos, this.leaf, box);
 			if(forceUpdate)
 				((IWorld) worldIn).getPendingBlockTicks().scheduleTick(blockpos, ModBlocks.palm_fronds, 1);
 		}

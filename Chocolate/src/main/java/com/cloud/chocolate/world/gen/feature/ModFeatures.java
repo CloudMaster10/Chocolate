@@ -5,5 +5,5 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 public class ModFeatures
 {
-	public static final Feature<TreeFeatureConfig> PALM_TREE = new PalmTreeFeature(TreeFeatureConfig::func_227338_a_, false);
+	public static final Feature<TreeFeatureConfig> PALM_TREE = new PalmTreeFeature(TreeFeatureConfig::deserializeFoliage, false);
 }

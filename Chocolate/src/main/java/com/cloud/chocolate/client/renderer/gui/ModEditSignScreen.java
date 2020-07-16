@@ -92,7 +92,7 @@ public class ModEditSignScreen extends Screen
 
 	public boolean charTyped(char p_charTyped_1_, int p_charTyped_2_)
 	{
-		this.textInputUtil.func_216894_a(p_charTyped_1_);
+		this.textInputUtil.putChar(p_charTyped_1_);
 		return true;
 	}
 
@@ -106,17 +106,17 @@ public class ModEditSignScreen extends Screen
 		if (firstKey == 265)
 		{
 			this.editLine = this.editLine - 1 & 3;
-			this.textInputUtil.func_216899_b();
+			this.textInputUtil.putCursorAtEnd();
 			return true;
 		}
 		else if (firstKey != 264 && firstKey != 257 && firstKey != 335)
 		{
-			return this.textInputUtil.func_216897_a(firstKey) ? true : super.keyPressed(firstKey, secondKey, thirdKey);
+			return this.textInputUtil.specialKeyPressed(firstKey) ? true : super.keyPressed(firstKey, secondKey, thirdKey);
 		}
 		else
 		{
 			this.editLine = this.editLine + 1 & 3;
-			this.textInputUtil.func_216899_b();
+			this.textInputUtil.putCursorAtEnd();
 			return true;
 		}
 	}
@@ -169,8 +169,8 @@ public class ModEditSignScreen extends Screen
 		}
 
 		Matrix4f matrix4f = matrixstack.getLast().getMatrix();
-		int k = this.textInputUtil.func_216896_c();
-		int l = this.textInputUtil.func_216898_d();
+		int k = this.textInputUtil.getEndIndex();
+		int l = this.textInputUtil.getEndIndex();
 		int i1 = this.minecraft.fontRenderer.getBidiFlag() ? -1 : 1;
 		int j1 = this.editLine * 10 - this.tileSign.signText.length * 5;
 
