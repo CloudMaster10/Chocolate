@@ -35,7 +35,7 @@
                   ]
                 }
               ],
-              "name": "chocolate:palm_leaves"
+              "name": "chocolate:sakura_blossoms"
             },
             {
               "type": "minecraft:item",
@@ -54,7 +54,7 @@
                   ]
                 }
               ],
-              "name": "chocolate:palm_sapling"
+              "name": "chocolate:sakura_sapling"
             }
           ]
         }

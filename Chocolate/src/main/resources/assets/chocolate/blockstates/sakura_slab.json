@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "chocolate:block/sakura_slab" },
+        "type=top": { "model": "chocolate:block/sakura_slab_top" },
+        "type=double": { "model": "chocolate:block/sakura_planks" }
+    }
+}

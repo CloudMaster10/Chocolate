@@ -49,6 +49,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBoatEntity extends BoatEntity
 {
@@ -226,6 +227,8 @@ public class ModBoatEntity extends BoatEntity
 		case PALM:
 		default:
 			return ModItems.palm_boat;
+		case SAKURA:
+			return ModItems.sakura_boat;
 		}
 	}
 
@@ -1001,7 +1004,8 @@ public class ModBoatEntity extends BoatEntity
 
 	public static enum Type
 	{
-		PALM(ModBlocks.palm_planks, "palm");
+		PALM(ModBlocks.palm_planks, "palm"),
+		SAKURA(ModBlocks.sakura_planks, "sakura");
 
 		private final String name;
 		private final Block block;

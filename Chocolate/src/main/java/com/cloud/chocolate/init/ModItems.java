@@ -15,13 +15,17 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModItems
 {
 	//public static Item palm_sign;
+	
 	public static Item palm_boat;
+	public static Item sakura_boat;
 	
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
 	{
         //palm_sign = registerItem(new ModSignItem((new Item.Properties()).maxStackSize(16).group(ItemGroup.DECORATIONS), ModBlocks.palm_standing_sign, ModBlocks.palm_wall_sign), "palm_sign_item");
+    	
     	palm_boat = registerItem(new ModBoatItem(ModBoatEntity.Type.PALM, (new Item.Properties()).maxStackSize(1).group(ItemGroup.TRANSPORTATION)), "palm_boat");
+    	sakura_boat = registerItem(new ModBoatItem(ModBoatEntity.Type.SAKURA, (new Item.Properties()).maxStackSize(1).group(ItemGroup.TRANSPORTATION)), "sakura_boat");
 	}
     
     // Register new item

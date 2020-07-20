@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "chocolate:potted_palm_sapling"
+        "chocolate:potted_palm_sapling",
+        "chocolate:potted_sakura_sapling"
     ]
 }

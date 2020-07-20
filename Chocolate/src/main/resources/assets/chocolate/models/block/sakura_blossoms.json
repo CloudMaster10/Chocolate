@@ -1,0 +1,6 @@
+{
+    "parent": "block/leaves",
+    "textures": {
+        "all": "chocolate:block/sakura_blossoms"
+    }
+}

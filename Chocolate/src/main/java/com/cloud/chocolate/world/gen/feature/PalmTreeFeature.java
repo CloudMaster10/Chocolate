@@ -7,47 +7,26 @@ import java.util.function.Function;
 import com.cloud.chocolate.init.ModBlocks;
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraftforge.common.IPlantable;
+import net.minecraft.world.IWorld;
 
 public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 {
-	//private static final BlockState DEFAULT_TRUNK = ModBlocks.palm_log.getDefaultState();
-	//private static final BlockState DEFAULT_LEAF = ModBlocks.palm_leaves.getDefaultState();
-	
-	protected int minTreeHeight = 6;
-	private BlockState trunk = ModBlocks.palm_log.getDefaultState();
-	private BlockState leaf = ModBlocks.palm_fronds.getDefaultState();
-	
-	public PalmTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> configFactoryIn, boolean doBlockNotifyOnPlace)
+	public PalmTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> configFactoryIn)
 	{
 		super(configFactoryIn);
 	}
-	
-	/*public PalmTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> configFactoryIn, boolean doBlockNotifyOnPlace)
-	{
-		this(configFactoryIn, doBlockNotifyOnPlace, 4, DEFAULT_TRUNK, DEFAULT_LEAF);
-	}
-	
-	public PalmTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> configFactoryIn, boolean doBlockNotifyOnPlace, int minTreeHeightIn, BlockState trunkState, BlockState leafState)
-	{
-		super(configFactoryIn);
-		this.minTreeHeight = minTreeHeightIn;
-		this.trunk = trunkState;
-		this.leaf = leafState;
-	}*/
     
 	@Override
 	protected boolean place(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set1, Set<BlockPos> set2, MutableBoundingBox box, TreeFeatureConfig config)
 	{
-		int treeHeight = this.minTreeHeight;
+		int treeHeight = config.baseHeight;
 		boolean flag = true;
 		if (position.getY() >= 1 && position.getY() + treeHeight + 1 <= worldIn.getMaxHeight())
 		{
@@ -105,23 +84,19 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 						if(y == slant1 || y == slant2)
 							position = position.offset(toSlant);
 					}
-					if (isAirOrLeaves(worldIn, position) || isAir(worldIn, position))
-					{
-						this.setBlockState(worldIn, position, this.trunk, box);
-						set1.add(position.toImmutable());
-					}
+
+					this.setLog(worldIn, rand, position, set1, box, config);
 				}
-				
 				
 				// Place Canopy
 				double canopyType = rand.nextDouble();
 				
 				if(canopyType <= .45)
-					flatCanopy(worldIn, position, box);
+					flatCanopy(worldIn, rand, position, set2, box, config);
 				else if(canopyType <= .8)
-					bushyCanopy(worldIn, position, box);
+					bushyCanopy(worldIn, rand, position, set2, box, config);
 				else
-					roundCanopy(worldIn, position, box);
+					roundCanopy(worldIn, rand, position, set2, box, config);
 				
 
 				return true;
@@ -137,193 +112,196 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 		}
 	}
 	
-	void placeLeaves(int x, int y, int z, IWorldGenerationReader worldIn, BlockPos position, MutableBoundingBox box, boolean forceUpdate) {
+	void placeLeaves(int x, int y, int z, IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, TreeFeatureConfig config, boolean forceUpdate)
+	{
 		BlockPos blockpos = new BlockPos(position.getX() + x, position.getY() + y, position.getZ() + z);
-		if (isAirOrLeaves(worldIn, blockpos) || isAir(worldIn, blockpos)) {
-			this.setBlockState(worldIn, blockpos, this.leaf, box);
-			if(forceUpdate)
-				((IWorld) worldIn).getPendingBlockTicks().scheduleTick(blockpos, ModBlocks.palm_fronds, 1);
+
+		this.setLeaf(worldIn, rand, blockpos, set2, box, config);
+		if(forceUpdate)
+		{
+			((IWorld) worldIn).getPendingBlockTicks().scheduleTick(blockpos, ModBlocks.palm_fronds, 1);
 		}
+
 	}
 	
-	void flatCanopy(IWorldGenerationReader worldIn, BlockPos position, MutableBoundingBox box) {
+	void flatCanopy(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, TreeFeatureConfig config) {
 		// Layer 0
-		placeLeaves(-2, 0, -1, worldIn, position, box, false);
-		placeLeaves(-2, 0, 0, worldIn, position, box, false);
-		placeLeaves(-2, 0, 1, worldIn, position, box, false);
+		placeLeaves(-2, 0, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-2, 0, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-2, 0, 1, worldIn, rand, position, set2, box, config, false);
 		
-		placeLeaves(-1, 0, -2, worldIn, position, box, false);
-		placeLeaves(-1, 0, -1, worldIn, position, box, false);
-		placeLeaves(-1, 0, 0, worldIn, position, box, false);
-		placeLeaves(-1, 0, 1, worldIn, position, box, false);
-		placeLeaves(-1, 0, 2, worldIn, position, box, false);
+		placeLeaves(-1, 0, -2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 0, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 0, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 0, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 0, 2, worldIn, rand, position, set2, box, config, false);
 		
-		placeLeaves(0, 0, -2, worldIn, position, box, false);
-		placeLeaves(0, 0, -1, worldIn, position, box, false);
-		placeLeaves(0, 0, 1, worldIn, position, box, false);
-		placeLeaves(0, 0, 2, worldIn, position, box, false);
+		placeLeaves(0, 0, -2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 0, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 0, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 0, 2, worldIn, rand, position, set2, box, config, false);
 		
-		placeLeaves(1, 0, -2, worldIn, position, box, false);
-		placeLeaves(1, 0, -1, worldIn, position, box, false);
-		placeLeaves(1, 0, 0, worldIn, position, box, false);
-		placeLeaves(1, 0, 1, worldIn, position, box, false);
-		placeLeaves(1, 0, 2, worldIn, position, box, false);
+		placeLeaves(1, 0, -2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 0, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 0, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 0, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 0, 2, worldIn, rand, position, set2, box, config, false);
 
-		placeLeaves(2, 0, -1, worldIn, position, box, false);
-		placeLeaves(2, 0, 0, worldIn, position, box, false);
-		placeLeaves(2, 0, 1, worldIn, position, box, false);
+		placeLeaves(2, 0, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(2, 0, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(2, 0, 1, worldIn, rand, position, set2, box, config, false);
 		
 		// Layer 1
-		placeLeaves(-1, 1, -1, worldIn, position, box, false);
-		placeLeaves(-1, 1, 0, worldIn, position, box, false);
-		placeLeaves(-1, 1, 1, worldIn, position, box, false);
-		placeLeaves(0, 1, -1, worldIn, position, box, false);
-		placeLeaves(0, 1, 0, worldIn, position, box, false);
-		placeLeaves(0, 1, 1, worldIn, position, box, false);
-		placeLeaves(1, 1, -1, worldIn, position, box, false);
-		placeLeaves(1, 1, 0, worldIn, position, box, false);
-		placeLeaves(1, 1, 1, worldIn, position, box, false);
+		placeLeaves(-1, 1, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 1, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 1, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 1, 1, worldIn, rand, position, set2, box, config, false);
 		
-		placeLeaves(-3, 1, 0, worldIn, position, box, false);
-		placeLeaves(-2, 1, 0, worldIn, position, box, false);
-		placeLeaves(0, 1, -3, worldIn, position, box, false);
-		placeLeaves(0, 1, -2, worldIn, position, box, false);
-		placeLeaves(0, 1, 3, worldIn, position, box, false);
-		placeLeaves(0, 1, 2, worldIn, position, box, false);
-		placeLeaves(3, 1, 0, worldIn, position, box, false);
-		placeLeaves(2, 1, 0, worldIn, position, box, false);
+		placeLeaves(-3, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-2, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, -3, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, -2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, 3, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, 2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(3, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(2, 1, 0, worldIn, rand, position, set2, box, config, false);
 		
 		// Diagonal Leaves
-		placeLeaves(-2, 1, -2, worldIn, position, box, true);
-		placeLeaves(-2, 1, 2, worldIn, position, box, true);
-		placeLeaves(2, 1, -2, worldIn, position, box, true);
-		placeLeaves(2, 1, 2, worldIn, position, box, true);
+		placeLeaves(-2, 1, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(-2, 1, 2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, 1, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, 1, 2, worldIn, rand, position, set2, box, config, true);
 		
-		placeLeaves(-4, 0, 0, worldIn, position, box, true);
-		placeLeaves(-3, 0, -3, worldIn, position, box, true);
-		placeLeaves(-3, 0, 3, worldIn, position, box, true);
-		placeLeaves(0, 0, -4, worldIn, position, box, true);
-		placeLeaves(0, 0, 4, worldIn, position, box, true);
-		placeLeaves(3, 0, -3, worldIn, position, box, true);
-		placeLeaves(3, 0, 3, worldIn, position, box, true);
-		placeLeaves(4, 0, 0, worldIn, position, box, true);
+		placeLeaves(-4, 0, 0, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(-3, 0, -3, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(-3, 0, 3, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(0, 0, -4, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(0, 0, 4, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(3, 0, -3, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(3, 0, 3, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(4, 0, 0, worldIn, rand, position, set2, box, config, true);
 	}
 	
-	void bushyCanopy(IWorldGenerationReader worldIn, BlockPos position, MutableBoundingBox box) {		
+	void bushyCanopy(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, TreeFeatureConfig config) {		
 		// Layer 0
-		placeLeaves(-2, 0, -1, worldIn, position, box, false);
-		placeLeaves(-2, 0, 0, worldIn, position, box, false);
-		placeLeaves(-2, 0, 1, worldIn, position, box, false);
+		placeLeaves(-2, 0, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-2, 0, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-2, 0, 1, worldIn, rand, position, set2, box, config, false);
 		
-		placeLeaves(-1, 0, -2, worldIn, position, box, false);
-		placeLeaves(-1, 0, -1, worldIn, position, box, false);
-		placeLeaves(-1, 0, 0, worldIn, position, box, false);
-		placeLeaves(-1, 0, 1, worldIn, position, box, false);
-		placeLeaves(-1, 0, 2, worldIn, position, box, false);
+		placeLeaves(-1, 0, -2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 0, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 0, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 0, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 0, 2, worldIn, rand, position, set2, box, config, false);
 		
-		placeLeaves(0, 0, -2, worldIn, position, box, false);
-		placeLeaves(0, 0, -1, worldIn, position, box, false);
-		placeLeaves(0, 0, 1, worldIn, position, box, false);
-		placeLeaves(0, 0, 2, worldIn, position, box, false);
+		placeLeaves(0, 0, -2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 0, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 0, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 0, 2, worldIn, rand, position, set2, box, config, false);
 		
-		placeLeaves(1, 0, -2, worldIn, position, box, false);
-		placeLeaves(1, 0, -1, worldIn, position, box, false);
-		placeLeaves(1, 0, 0, worldIn, position, box, false);
-		placeLeaves(1, 0, 1, worldIn, position, box, false);
-		placeLeaves(1, 0, 2, worldIn, position, box, false);
+		placeLeaves(1, 0, -2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 0, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 0, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 0, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 0, 2, worldIn, rand, position, set2, box, config, false);
 
-		placeLeaves(2, 0, -1, worldIn, position, box, false);
-		placeLeaves(2, 0, 0, worldIn, position, box, false);
-		placeLeaves(2, 0, 1, worldIn, position, box, false);
+		placeLeaves(2, 0, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(2, 0, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(2, 0, 1, worldIn, rand, position, set2, box, config, false);
 		
 		// Layer 1
-		placeLeaves(-1, 1, -1, worldIn, position, box, false);
-		placeLeaves(-1, 1, 0, worldIn, position, box, false);
-		placeLeaves(-1, 1, 1, worldIn, position, box, false);
-		placeLeaves(0, 1, -1, worldIn, position, box, false);
-		placeLeaves(0, 1, 0, worldIn, position, box, false);
-		placeLeaves(0, 1, 1, worldIn, position, box, false);
-		placeLeaves(1, 1, -1, worldIn, position, box, false);
-		placeLeaves(1, 1, 0, worldIn, position, box, false);
-		placeLeaves(1, 1, 1, worldIn, position, box, false);
+		placeLeaves(-1, 1, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 1, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 1, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 1, 1, worldIn, rand, position, set2, box, config, false);
 		
-		placeLeaves(-3, 1, 0, worldIn, position, box, false);
-		placeLeaves(-2, 1, 0, worldIn, position, box, false);
-		placeLeaves(0, 1, -3, worldIn, position, box, false);
-		placeLeaves(0, 1, -2, worldIn, position, box, false);
-		placeLeaves(0, 1, 3, worldIn, position, box, false);
-		placeLeaves(0, 1, 2, worldIn, position, box, false);
-		placeLeaves(3, 1, 0, worldIn, position, box, false);
-		placeLeaves(2, 1, 0, worldIn, position, box, false);
+		placeLeaves(-3, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-2, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, -3, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, -2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, 3, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, 2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(3, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(2, 1, 0, worldIn, rand, position, set2, box, config, false);
 		
 		// Diagonal Leaves
-		placeLeaves(-2, -1, -2, worldIn, position, box, true);
-		placeLeaves(-2, -1, 2, worldIn, position, box, true);
-		placeLeaves(2, -1, -2, worldIn, position, box, true);
-		placeLeaves(2, -1, 2, worldIn, position, box, true);
+		placeLeaves(-2, -1, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(-2, -1, 2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, -1, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, -1, 2, worldIn, rand, position, set2, box, config, true);
 		
-		placeLeaves(-2, 1, -2, worldIn, position, box, true);
-		placeLeaves(-2, 1, 2, worldIn, position, box, true);
-		placeLeaves(2, 1, -2, worldIn, position, box, true);
-		placeLeaves(2, 1, 2, worldIn, position, box, true);
+		placeLeaves(-2, 1, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(-2, 1, 2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, 1, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, 1, 2, worldIn, rand, position, set2, box, config, true);
 		
-		placeLeaves(-4, 0, 0, worldIn, position, box, true);
-		placeLeaves(0, 0, -4, worldIn, position, box, true);
-		placeLeaves(0, 0, 4, worldIn, position, box, true);
-		placeLeaves(4, 0, 0, worldIn, position, box, true);
+		placeLeaves(-4, 0, 0, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(0, 0, -4, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(0, 0, 4, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(4, 0, 0, worldIn, rand, position, set2, box, config, true);
 	}
 	
-	void roundCanopy(IWorldGenerationReader worldIn, BlockPos position, MutableBoundingBox box) {
+	void roundCanopy(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, TreeFeatureConfig config) {
 		// Layer 0
-		placeLeaves(-1, 0, 0, worldIn, position, box, false);
-		placeLeaves(0, 0, -1, worldIn, position, box, false);
-		placeLeaves(0, 0, 1, worldIn, position, box, false);
-		placeLeaves(1, 0, 0, worldIn, position, box, false);
+		placeLeaves(-1, 0, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 0, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 0, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 0, 0, worldIn, rand, position, set2, box, config, false);
 		
 		// Layer 1
-		placeLeaves(-2, 1, 0, worldIn, position, box, false);
-		placeLeaves(-1, 1, -1, worldIn, position, box, false);
-		placeLeaves(-1, 1, 0, worldIn, position, box, false);
-		placeLeaves(-1, 1, 1, worldIn, position, box, false);
-		placeLeaves(0, 1, -2, worldIn, position, box, false);
-		placeLeaves(0, 1, -1, worldIn, position, box, false);
-		placeLeaves(0, 1, 0, worldIn, position, box, false);
-		placeLeaves(0, 1, 1, worldIn, position, box, false);
-		placeLeaves(0, 1, 2, worldIn, position, box, false);
-		placeLeaves(1, 1, -1, worldIn, position, box, false);
-		placeLeaves(1, 1, 0, worldIn, position, box, false);
-		placeLeaves(1, 1, 1, worldIn, position, box, false);
-		placeLeaves(2, 1, 0, worldIn, position, box, false);
+		placeLeaves(-2, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 1, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(-1, 1, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, -2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 1, 2, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 1, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 1, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 1, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(2, 1, 0, worldIn, rand, position, set2, box, config, false);
 		
 		// Layer 2
-		placeLeaves(-1, 2, 0, worldIn, position, box, false);
-		placeLeaves(0, 2, -1, worldIn, position, box, false);
-		placeLeaves(0, 2, 0, worldIn, position, box, false);
-		placeLeaves(0, 2, 1, worldIn, position, box, false);
-		placeLeaves(1, 2, 0, worldIn, position, box, false);
+		placeLeaves(-1, 2, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 2, -1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 2, 0, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(0, 2, 1, worldIn, rand, position, set2, box, config, false);
+		placeLeaves(1, 2, 0, worldIn, rand, position, set2, box, config, false);
 		
 		// Layer 3
-		placeLeaves(0, 3, 0, worldIn, position, box, false);
+		placeLeaves(0, 3, 0, worldIn, rand, position, set2, box, config, false);
 		
 		// Diagonal Leaves
-		placeLeaves(-2, -1, 0, worldIn, position, box, true);
-		placeLeaves(0, -1, -2, worldIn, position, box, true);
-		placeLeaves(0, -1, 2, worldIn, position, box, true);
-		placeLeaves(2, -1, 0, worldIn, position, box, true);
+		placeLeaves(-2, -1, 0, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(0, -1, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(0, -1, 2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, -1, 0, worldIn, rand, position, set2, box, config, true);
 		
-		placeLeaves(-2, 0, -2, worldIn, position, box, true);
-		placeLeaves(-2, 0, 2, worldIn, position, box, true);
-		placeLeaves(2, 0, -2, worldIn, position, box, true);
-		placeLeaves(2, 0, 2, worldIn, position, box, true);
+		placeLeaves(-2, 0, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(-2, 0, 2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, 0, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, 0, 2, worldIn, rand, position, set2, box, config, true);
 		
-		placeLeaves(-2, 2, -2, worldIn, position, box, true);
-		placeLeaves(-2, 2, 2, worldIn, position, box, true);
-		placeLeaves(2, 2, -2, worldIn, position, box, true);
-		placeLeaves(2, 2, 2, worldIn, position, box, true);
+		placeLeaves(-2, 2, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(-2, 2, 2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, 2, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, 2, 2, worldIn, rand, position, set2, box, config, true);
 		
-		placeLeaves(-2, 3, 0, worldIn, position, box, true);
-		placeLeaves(0, 3, -2, worldIn, position, box, true);
-		placeLeaves(0, 3, 2, worldIn, position, box, true);
-		placeLeaves(2, 3, 0, worldIn, position, box, true);
+		placeLeaves(-2, 3, 0, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(0, 3, -2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(0, 3, 2, worldIn, rand, position, set2, box, config, true);
+		placeLeaves(2, 3, 0, worldIn, rand, position, set2, box, config, true);
 	}
 }

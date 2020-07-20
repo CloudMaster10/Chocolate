@@ -21,8 +21,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ModBoatRenderer extends EntityRenderer<ModBoatEntity>
 {
-	private static final ResourceLocation[] BOAT_TEXTURES = new ResourceLocation[] {
-			new ResourceLocation(Chocolate.MOD_ID, "textures/entity/boat/palm.png") };
 	protected final ModBoatModel modelBoat = new ModBoatModel();
 
 	public ModBoatRenderer(EntityRendererManager renderManagerIn)
@@ -67,6 +65,6 @@ public class ModBoatRenderer extends EntityRenderer<ModBoatEntity>
 
 	public ResourceLocation getEntityTexture(ModBoatEntity entity)
 	{
-		return BOAT_TEXTURES[entity.getModBoatType().ordinal()];
+		return new ResourceLocation(Chocolate.MOD_ID, "textures/entity/boat/" + entity.getModBoatType().getName() + ".png");
 	}
 }

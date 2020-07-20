@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "#chocolate:palm_logs"
+        "#chocolate:palm_logs",
+        "#chocolate:sakura_logs"
     ]
 }

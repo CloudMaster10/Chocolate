@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "chocolate:sakura_planks"
+    }
+  },
+  "result": {
+    "item": "chocolate:sakura_trapdoor",
+    "count": 2
+  }
+}

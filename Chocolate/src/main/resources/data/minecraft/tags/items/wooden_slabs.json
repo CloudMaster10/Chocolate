@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "chocolate:palm_slab"
+        "chocolate:palm_slab",
+        "chocolate:sakura_slab"
     ]
 }

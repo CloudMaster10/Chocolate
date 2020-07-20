@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "chocolate:palm_fence_gate"
+        "chocolate:palm_fence_gate",
+        "chocolate:sakura_fence_gate"
     ]
 }

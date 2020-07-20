@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "chocolate:block/stripped_sakura_log",
+        "side": "chocolate:block/stripped_sakura_log"
+    }
+}

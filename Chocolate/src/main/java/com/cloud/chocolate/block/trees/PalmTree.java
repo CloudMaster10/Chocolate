@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.cloud.chocolate.world.gen.feature.ModFeatures;
+import com.cloud.chocolate.init.ModFeatures;
 
 import net.minecraft.block.trees.Tree;
 import net.minecraft.world.biome.DefaultBiomeFeatures;

@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "powered=false": { "model": "chocolate:block/sakura_pressure_plate" },
+        "powered=true": { "model": "chocolate:block/sakura_pressure_plate_down" }
+    }
+}
