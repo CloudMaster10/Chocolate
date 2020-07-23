@@ -127,7 +127,7 @@ public class BonemealUsesShortGrass {
 								}
 
 								thisPos = thisPos.add(world.getRandom().nextInt(3) - 1, (world.getRandom().nextInt(3) - 1) * world.getRandom().nextInt(3) / 2, world.getRandom().nextInt(3) - 1);
-								if (world.getBlockState(thisPos.down()) != event.getBlock() || world.getBlockState(thisPos).isCollisionShapeOpaque(world, thisPos))
+								if (world.getBlockState(thisPos.down()) != event.getBlock() || world.getBlockState(thisPos).isOpaqueCube(world, thisPos))
 								{
 									break;
 								}
@@ -205,7 +205,7 @@ public class BonemealUsesShortGrass {
 					}
 
 					thisPos = thisPos.add(world.getRandom().nextInt(3) - 1, (world.getRandom().nextInt(3) - 1) * world.getRandom().nextInt(3) / 2, world.getRandom().nextInt(3) - 1);
-					if (world.getBlockState(thisPos.down()) != event.getBlock() || world.getBlockState(thisPos).isCollisionShapeOpaque(world, thisPos))
+					if (world.getBlockState(thisPos.down()) != event.getBlock() || world.getBlockState(thisPos).isOpaqueCube(world, thisPos))
 					{
 						break;
 					}

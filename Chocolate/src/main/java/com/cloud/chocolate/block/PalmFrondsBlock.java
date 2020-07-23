@@ -20,9 +20,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.IForgeShearable;
 
-@SuppressWarnings("deprecation")
-public class PalmFrondsBlock extends Block implements net.minecraftforge.common.IShearable {
+public class PalmFrondsBlock extends Block implements IForgeShearable {
 	public static final IntegerProperty DISTANCE = BlockStateProperties.DISTANCE_1_7;
 	public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 
@@ -77,15 +77,14 @@ public class PalmFrondsBlock extends Block implements net.minecraftforge.common.
 	
 	public static BlockState updateDistance(BlockState state, IWorld worldIn, BlockPos pos) {
 		int i = 7;
-
-		try (BlockPos.PooledMutable blockpos$pooledmutable = BlockPos.PooledMutable.retain()) {
-			for (int x = -1; x <= 1; x++)
-				for (int y = -1; y <= 1; y++)
-					for (int z = -1; z <= 1; z++) {
-						blockpos$pooledmutable.setPos(pos).move(x, y, z);
-						i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$pooledmutable)) + 1);
-					}
-		}
+		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+		
+		for (int x = -1; x <= 1; x++)
+			for (int y = -1; y <= 1; y++)
+				for (int z = -1; z <= 1; z++) {
+					blockpos$mutable.setPos(pos).move(x, y, z);
+					i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$mutable)) + 1);
+				}
 
 		return state.with(DISTANCE, i);
 	}

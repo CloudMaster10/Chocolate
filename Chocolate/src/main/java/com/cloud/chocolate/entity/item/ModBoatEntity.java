@@ -19,7 +19,7 @@ import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -30,6 +30,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.client.CSteerBoatPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.EntityPredicates;
@@ -40,16 +41,15 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBoatEntity extends BoatEntity
 {
@@ -95,7 +95,7 @@ public class ModBoatEntity extends BoatEntity
 	{
 		this(ModEntities.boat, worldIn);
 		this.setPosition(x, y, z);
-		this.setMotion(Vec3d.ZERO);
+		this.setMotion(Vector3d.ZERO);
 		this.prevPosX = x;
 		this.prevPosY = y;
 		this.prevPosZ = z;
@@ -314,7 +314,7 @@ public class ModBoatEntity extends BoatEntity
 		}
 		else
 		{
-			this.setMotion(Vec3d.ZERO);
+			this.setMotion(Vector3d.ZERO);
 		}
 
 		this.updateRocking();
@@ -328,7 +328,7 @@ public class ModBoatEntity extends BoatEntity
 					SoundEvent soundevent = this.getPaddleSound();
 					if (soundevent != null)
 					{
-						Vec3d vec3d = this.getLook(1.0F);
+						Vector3d vec3d = this.getLook(1.0F);
 						double d0 = i == 1 ? -vec3d.z : vec3d.z;
 						double d1 = i == 1 ? vec3d.x : -vec3d.x;
 						this.world.playSound((PlayerEntity) null, this.getPosX() + d0, this.getPosY(), this.getPosZ() + d1, soundevent, this.getSoundCategory(), 1.0F, 0.8F + 0.4F * this.rand.nextFloat());
@@ -401,7 +401,7 @@ public class ModBoatEntity extends BoatEntity
 				if (j > 0 && k == 0)
 				{
 					this.setRockingTicks(0);
-					Vec3d vec3d = this.getMotion();
+					Vector3d vec3d = this.getMotion();
 					if (this.bubbleColumnDirectionIsDown)
 					{
 						this.setMotion(vec3d.add(0.0D, -0.7D, 0.0D));
@@ -509,42 +509,44 @@ public class ModBoatEntity extends BoatEntity
 		int l = MathHelper.ceil(axisalignedbb.maxY - this.lastYd);
 		int i1 = MathHelper.floor(axisalignedbb.minZ);
 		int j1 = MathHelper.ceil(axisalignedbb.maxZ);
+		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
-		try (BlockPos.PooledMutable blockpos$pooledmutable = BlockPos.PooledMutable.retain())
+		label39: for (int k1 = k; k1 < l; ++k1)
 		{
-			label161:
-			for (int k1 = k; k1 < l; ++k1)
+			float f = 0.0F;
+			int l1 = i;
+
+			while (true)
 			{
-				float f = 0.0F;
-
-				for (int l1 = i; l1 < j; ++l1)
+				if (l1 >= j)
 				{
-					for (int i2 = i1; i2 < j1; ++i2)
+					if (f < 1.0F)
 					{
-						blockpos$pooledmutable.setPos(l1, k1, i2);
-						IFluidState ifluidstate = this.world.getFluidState(blockpos$pooledmutable);
-						if (ifluidstate.isTagged(FluidTags.WATER))
-						{
-							f = Math.max(f, ifluidstate.getActualHeight(this.world, blockpos$pooledmutable));
-						}
+						return (float) blockpos$mutable.getY() + f;
+					}
+					break;
+				}
 
-						if (f >= 1.0F)
-						{
-							continue label161;
-						}
+				for (int i2 = i1; i2 < j1; ++i2) 
+				{
+					blockpos$mutable.setPos(l1, k1, i2);
+					FluidState fluidstate = this.world.getFluidState(blockpos$mutable);
+					if (fluidstate.isTagged(FluidTags.WATER))
+					{
+						f = Math.max(f, fluidstate.getActualHeight(this.world, blockpos$mutable));
+					}
+
+					if (f >= 1.0F)
+					{
+						continue label39;
 					}
 				}
 
-				if (f < 1.0F)
-				{
-					float f2 = (float) blockpos$pooledmutable.getY() + f;
-					return f2;
-				}
+				++l1;
 			}
-
-			float f1 = (float) (l + 1);
-			return f1;
 		}
+
+		return (float) (l + 1);
 	}
 
 	@Override
@@ -561,27 +563,25 @@ public class ModBoatEntity extends BoatEntity
 		VoxelShape voxelshape = VoxelShapes.create(axisalignedbb1);
 		float f = 0.0F;
 		int k1 = 0;
+		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
-		try (BlockPos.PooledMutable blockpos$pooledmutable = BlockPos.PooledMutable.retain())
+		for (int l1 = i; l1 < j; ++l1)
 		{
-			for (int l1 = i; l1 < j; ++l1)
+			for (int i2 = i1; i2 < j1; ++i2)
 			{
-				for (int i2 = i1; i2 < j1; ++i2)
+				int j2 = (l1 != i && l1 != j - 1 ? 0 : 1) + (i2 != i1 && i2 != j1 - 1 ? 0 : 1);
+				if (j2 != 2)
 				{
-					int j2 = (l1 != i && l1 != j - 1 ? 0 : 1) + (i2 != i1 && i2 != j1 - 1 ? 0 : 1);
-					if (j2 != 2)
+					for (int k2 = k; k2 < l; ++k2)
 					{
-						for (int k2 = k; k2 < l; ++k2)
+						if (j2 <= 0 || k2 != k && k2 != l - 1)
 						{
-							if (j2 <= 0 || k2 != k && k2 != l - 1)
+							blockpos$mutable.setPos(l1, k2, i2);
+							BlockState blockstate = this.world.getBlockState(blockpos$mutable);
+							if (!(blockstate.getBlock() instanceof LilyPadBlock) && VoxelShapes.compare(blockstate.getCollisionShape(this.world, blockpos$mutable).withOffset((double) l1, (double) k2, (double) i2), voxelshape, IBooleanFunction.AND))
 							{
-								blockpos$pooledmutable.setPos(l1, k2, i2);
-								BlockState blockstate = this.world.getBlockState(blockpos$pooledmutable);
-								if (!(blockstate.getBlock() instanceof LilyPadBlock) && VoxelShapes.compare(blockstate.getCollisionShape(this.world, blockpos$pooledmutable).withOffset((double) l1, (double) k2, (double) i2), voxelshape, IBooleanFunction.AND))
-								{
-									f += blockstate.getSlipperiness(this.world, blockpos$pooledmutable, this);
-									++k1;
-								}
+								f += blockstate.getSlipperiness(this.world, blockpos$mutable, this);
+								++k1;
 							}
 						}
 					}
@@ -592,7 +592,8 @@ public class ModBoatEntity extends BoatEntity
 		return f / (float) k1;
 	}
 
-	private boolean checkInWater() {
+	private boolean checkInWater()
+	{
 		AxisAlignedBB axisalignedbb = this.getBoundingBox();
 		int i = MathHelper.floor(axisalignedbb.minX);
 		int j = MathHelper.ceil(axisalignedbb.maxX);
@@ -602,23 +603,21 @@ public class ModBoatEntity extends BoatEntity
 		int j1 = MathHelper.ceil(axisalignedbb.maxZ);
 		boolean flag = false;
 		this.waterLevel = Double.MIN_VALUE;
+		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
-		try (BlockPos.PooledMutable blockpos$pooledmutable = BlockPos.PooledMutable.retain())
+		for (int k1 = i; k1 < j; ++k1)
 		{
-			for (int k1 = i; k1 < j; ++k1)
+			for (int l1 = k; l1 < l; ++l1)
 			{
-				for (int l1 = k; l1 < l; ++l1)
+				for (int i2 = i1; i2 < j1; ++i2)
 				{
-					for (int i2 = i1; i2 < j1; ++i2)
+					blockpos$mutable.setPos(k1, l1, i2);
+					FluidState fluidstate = this.world.getFluidState(blockpos$mutable);
+					if (fluidstate.isTagged(FluidTags.WATER))
 					{
-						blockpos$pooledmutable.setPos(k1, l1, i2);
-						IFluidState ifluidstate = this.world.getFluidState(blockpos$pooledmutable);
-						if (ifluidstate.isTagged(FluidTags.WATER))
-						{
-							float f = (float) l1 + ifluidstate.getActualHeight(this.world, blockpos$pooledmutable);
-							this.waterLevel = Math.max((double) f, this.waterLevel);
-							flag |= axisalignedbb.minY < (double) f;
-						}
+						float f = (float) l1 + fluidstate.getActualHeight(this.world, blockpos$mutable);
+						this.waterLevel = Math.max((double) f, this.waterLevel);
+						flag |= axisalignedbb.minY < (double) f;
 					}
 				}
 			}
@@ -627,8 +626,11 @@ public class ModBoatEntity extends BoatEntity
 		return flag;
 	}
 
+	/**
+	 * Decides whether the boat is currently underwater.
+	 */
 	@Nullable
-	private ModBoatEntity.Status getUnderwaterStatus()
+	private BoatEntity.Status getUnderwaterStatus()
 	{
 		AxisAlignedBB axisalignedbb = this.getBoundingBox();
 		double d0 = axisalignedbb.maxY + 0.001D;
@@ -639,33 +641,29 @@ public class ModBoatEntity extends BoatEntity
 		int i1 = MathHelper.floor(axisalignedbb.minZ);
 		int j1 = MathHelper.ceil(axisalignedbb.maxZ);
 		boolean flag = false;
+		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
-		try (BlockPos.PooledMutable blockpos$pooledmutable = BlockPos.PooledMutable.retain())
+		for (int k1 = i; k1 < j; ++k1)
 		{
-			for (int k1 = i; k1 < j; ++k1)
+			for (int l1 = k; l1 < l; ++l1)
 			{
-				for (int l1 = k; l1 < l; ++l1)
+				for (int i2 = i1; i2 < j1; ++i2)
 				{
-					for (int i2 = i1; i2 < j1; ++i2)
-					{
-						blockpos$pooledmutable.setPos(k1, l1, i2);
-						IFluidState ifluidstate = this.world.getFluidState(blockpos$pooledmutable);
-						if (ifluidstate.isTagged(FluidTags.WATER) && d0 < (double) ((float) blockpos$pooledmutable.getY() + ifluidstate.getActualHeight(this.world, blockpos$pooledmutable)))
+					blockpos$mutable.setPos(k1, l1, i2);
+					FluidState fluidstate = this.world.getFluidState(blockpos$mutable);
+					if (fluidstate.isTagged(FluidTags.WATER) && d0 < (double) ((float) blockpos$mutable.getY() + fluidstate.getActualHeight(this.world, blockpos$mutable))) {
+						if (!fluidstate.isSource())
 						{
-							if (!ifluidstate.isSource())
-							{
-								ModBoatEntity.Status ModBoatEntity$status = ModBoatEntity.Status.UNDER_FLOWING_WATER;
-								return ModBoatEntity$status;
-							}
-
-							flag = true;
+							return BoatEntity.Status.UNDER_FLOWING_WATER;
 						}
+
+						flag = true;
 					}
 				}
 			}
 		}
 
-		return flag ? ModBoatEntity.Status.UNDER_WATER : null;
+		return flag ? BoatEntity.Status.UNDER_WATER : null;
 	}
 
 	private void updateMotion()
@@ -712,12 +710,12 @@ public class ModBoatEntity extends BoatEntity
 				}
 			}
 
-			Vec3d vec3d = this.getMotion();
+			Vector3d vec3d = this.getMotion();
 			this.setMotion(vec3d.x * (double) this.momentum, vec3d.y + d1, vec3d.z * (double) this.momentum);
 			this.deltaRotation *= this.momentum;
 			if (d2 > 0.0D)
 			{
-				Vec3d vec3d1 = this.getMotion();
+				Vector3d vec3d1 = this.getMotion();
 				this.setMotion(vec3d1.x, (vec3d1.y + d2 * 0.06153846016296973D) * 0.75D, vec3d1.z);
 			}
 		}
@@ -784,7 +782,7 @@ public class ModBoatEntity extends BoatEntity
 				}
 			}
 
-			Vec3d vec3d = (new Vec3d((double) f, 0.0D, 0.0D)).rotateYaw(-this.rotationYaw * ((float) Math.PI / 180F) - ((float) Math.PI / 2F));
+			Vector3d vec3d = (new Vector3d((double) f, 0.0D, 0.0D)).rotateYaw(-this.rotationYaw * ((float) Math.PI / 180F) - ((float) Math.PI / 2F));
 			passenger.setPosition(this.getPosX() + vec3d.x, this.getPosY() + (double) f1, this.getPosZ() + vec3d.z);
 			passenger.rotationYaw += this.deltaRotation;
 			passenger.setRotationYawHead(passenger.getRotationYawHead() + this.deltaRotation);
@@ -832,15 +830,26 @@ public class ModBoatEntity extends BoatEntity
 	}
 
 	@Override
-	public boolean processInitialInteract(PlayerEntity player, Hand hand)
+	public ActionResultType processInitialInteract(PlayerEntity player, Hand hand)
 	{
 		if (player.isSecondaryUseActive())
 		{
-			return false;
+			return ActionResultType.PASS;
+		}
+		else if (this.outOfControlTicks < 60.0F)
+		{
+			if (!this.world.isRemote)
+			{
+				return player.startRiding(this) ? ActionResultType.CONSUME : ActionResultType.PASS;
+			}
+			else
+			{
+				return ActionResultType.SUCCESS;
+			}
 		}
 		else
 		{
-			return !this.world.isRemote && this.outOfControlTicks < 60.0F ? player.startRiding(this) : false;
+			return ActionResultType.PASS;
 		}
 	}
 
@@ -881,7 +890,7 @@ public class ModBoatEntity extends BoatEntity
 
 				this.fallDistance = 0.0F;
 			}
-			else if (!this.world.getFluidState((new BlockPos(this)).down()).isTagged(FluidTags.WATER) && y < 0.0D)
+			else if (!this.world.getFluidState(this.func_233580_cy_().down()).isTagged(FluidTags.WATER) && y < 0.0D)
 			{
 				this.fallDistance = (float) ((double) this.fallDistance - y);
 			}

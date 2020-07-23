@@ -11,8 +11,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalBlock;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -56,7 +56,7 @@ public class ModWallSignBlock extends ModAbstractSignBlock
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
 		BlockState blockstate = this.getDefaultState();
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		IWorldReader iworldreader = context.getWorld();
 		BlockPos blockpos = context.getPos();
 		Direction[] adirection = context.getNearestLookingDirections();

@@ -12,6 +12,7 @@ import com.cloud.chocolate.block.trees.SakuraTree;
 import com.cloud.chocolate.item.ModSignItem;
 import com.mojang.datafixers.util.Pair;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
@@ -20,7 +21,6 @@ import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.GlassBlock;
 import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.LogBlock;
 import net.minecraft.block.PaneBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.RotatedPillarBlock;
@@ -41,6 +41,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.Direction;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
@@ -186,9 +187,9 @@ public class ModBlocks
 		// Palm
 		palm_sapling = registerBlock(new PalmSaplingBlock(new PalmTree(), Block.Properties.from(Blocks.OAK_SAPLING)), ItemGroup.DECORATIONS, "palm_sapling");
 		palm_fronds = registerBlock(new PalmFrondsBlock(Block.Properties.from(Blocks.OAK_LEAVES)), ItemGroup.DECORATIONS, "palm_fronds");
-		palm_log = registerBlock(new LogBlock(MaterialColor.WHITE_TERRACOTTA, Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_GRAY_TERRACOTTA).hardnessAndResistance(2.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "palm_log");
+		palm_log = registerBlock(Blocks.func_235430_a_(MaterialColor.WHITE_TERRACOTTA, MaterialColor.LIGHT_GRAY_TERRACOTTA), ItemGroup.BUILDING_BLOCKS, "palm_log");
 		palm_wood = registerBlock(new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_GRAY_TERRACOTTA).hardnessAndResistance(2.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "palm_wood");
-		stripped_palm_log = registerBlock(new LogBlock(MaterialColor.WHITE_TERRACOTTA, Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "stripped_palm_log");
+		stripped_palm_log = registerBlock(Blocks.func_235430_a_(MaterialColor.WHITE_TERRACOTTA, MaterialColor.WHITE_TERRACOTTA), ItemGroup.BUILDING_BLOCKS, "stripped_palm_log");
 		stripped_palm_wood = registerBlock(new RotatedPillarBlock(Block.Properties.from(stripped_palm_log)), ItemGroup.BUILDING_BLOCKS, "stripped_palm_wood");
 		palm_planks = registerBlock(new Block(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "palm_planks");
 		palm_slab = registerBlock(new SlabBlock(Block.Properties.from(palm_planks)), ItemGroup.BUILDING_BLOCKS, "palm_slab");
@@ -207,9 +208,9 @@ public class ModBlocks
 		// Sakura
 		sakura_sapling = registerBlock(new SaplingBlock(new SakuraTree(), Block.Properties.create(Material.PLANTS, MaterialColor.PINK).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT)) {}, ItemGroup.DECORATIONS, "sakura_sapling");
 		sakura_blossoms = registerBlock(new LeavesBlock(Block.Properties.create(Material.LEAVES, MaterialColor.PINK).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid()), ItemGroup.DECORATIONS, "sakura_blossoms");
-		sakura_log = registerBlock(new LogBlock(MaterialColor.PINK_TERRACOTTA, Block.Properties.create(Material.WOOD, MaterialColor.GRAY).hardnessAndResistance(2.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "sakura_log");
+		sakura_log = registerBlock(Blocks.func_235430_a_(MaterialColor.PINK_TERRACOTTA, MaterialColor.GRAY), ItemGroup.BUILDING_BLOCKS, "sakura_log");
 		sakura_wood = registerBlock(new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.GRAY).hardnessAndResistance(2.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "sakura_wood");
-		stripped_sakura_log = registerBlock(new LogBlock(MaterialColor.PINK_TERRACOTTA, Block.Properties.create(Material.WOOD, MaterialColor.PINK_TERRACOTTA).hardnessAndResistance(2.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "stripped_sakura_log");
+		stripped_sakura_log = registerBlock(Blocks.func_235430_a_(MaterialColor.PINK_TERRACOTTA, MaterialColor.PINK_TERRACOTTA), ItemGroup.BUILDING_BLOCKS, "stripped_sakura_log");
 		stripped_sakura_wood = registerBlock(new RotatedPillarBlock(Block.Properties.from(stripped_sakura_log)), ItemGroup.BUILDING_BLOCKS, "stripped_sakura_wood");
 		sakura_planks = registerBlock(new Block(Block.Properties.create(Material.WOOD, MaterialColor.PINK_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "sakura_planks");
 		sakura_slab = registerBlock(new SlabBlock(Block.Properties.from(sakura_planks)), ItemGroup.BUILDING_BLOCKS, "sakura_slab");
@@ -262,7 +263,7 @@ public class ModBlocks
 		framed_black_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.BLACK, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_black_stained_glass_pane");
 		
 		// Candle
-		candle = registerBlock(new CandleBlock(Block.Properties.create(Material.CLAY, MaterialColor.GOLD).hardnessAndResistance(0.2F).lightValue(7).sound(SoundType.CLOTH)), ItemGroup.DECORATIONS, "candle");
+		candle = registerBlock(new CandleBlock(Block.Properties.create(Material.CLAY, MaterialColor.GOLD).hardnessAndResistance(0.2F).setLightLevel((p_235447_0_) -> { return 12; }).sound(SoundType.CLOTH)), ItemGroup.DECORATIONS, "candle");
 		
 		// Short Grass
 		short_grass = registerBlock(new ShortGrassBlock(Block.Properties.from(Blocks.GRASS)), ItemGroup.DECORATIONS, "short_grass");

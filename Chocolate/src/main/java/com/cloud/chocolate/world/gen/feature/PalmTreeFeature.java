@@ -2,23 +2,19 @@ package com.cloud.chocolate.world.gen.feature;
 
 import java.util.Random;
 import java.util.Set;
-import java.util.function.Function;
 
 import com.cloud.chocolate.init.ModBlocks;
-import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.gen.IWorldGenerationReader;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraftforge.common.IPlantable;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.IWorldGenerationReader;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 
-public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
+public class PalmTreeFeature
 {
-	public PalmTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> configFactoryIn)
+	/*
+	public PalmTreeFeature(Function<Dynamic<?>, ? extends TreeFeature> configFactoryIn)
 	{
 		super(configFactoryIn);
 	}
@@ -111,12 +107,14 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 			return false;
 		}
 	}
+	*/
 	
-	void placeLeaves(int x, int y, int z, IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, TreeFeatureConfig config, boolean forceUpdate)
+	static void placeLeaves(int x, int y, int z, IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, BaseTreeFeatureConfig config, boolean forceUpdate)
 	{
 		BlockPos blockpos = new BlockPos(position.getX() + x, position.getY() + y, position.getZ() + z);
 
-		this.setLeaf(worldIn, rand, blockpos, set2, box, config);
+		//this.setLeaf(worldIn, rand, blockpos, set2, box, config);
+		//FoliagePlacer.func_236753_a_(worldIn, rand, config, position, 0, set2, 0, false, box);
 		if(forceUpdate)
 		{
 			((IWorld) worldIn).getPendingBlockTicks().scheduleTick(blockpos, ModBlocks.palm_fronds, 1);
@@ -124,7 +122,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 
 	}
 	
-	void flatCanopy(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, TreeFeatureConfig config) {
+	public static void flatCanopy(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, BaseTreeFeatureConfig config) {
 		// Layer 0
 		placeLeaves(-2, 0, -1, worldIn, rand, position, set2, box, config, false);
 		placeLeaves(-2, 0, 0, worldIn, rand, position, set2, box, config, false);
@@ -187,7 +185,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 		placeLeaves(4, 0, 0, worldIn, rand, position, set2, box, config, true);
 	}
 	
-	void bushyCanopy(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, TreeFeatureConfig config) {		
+	public static void bushyCanopy(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, BaseTreeFeatureConfig config) {		
 		// Layer 0
 		placeLeaves(-2, 0, -1, worldIn, rand, position, set2, box, config, false);
 		placeLeaves(-2, 0, 0, worldIn, rand, position, set2, box, config, false);
@@ -251,7 +249,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 		placeLeaves(4, 0, 0, worldIn, rand, position, set2, box, config, true);
 	}
 	
-	void roundCanopy(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, TreeFeatureConfig config) {
+	public static void roundCanopy(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> set2, MutableBoundingBox box, BaseTreeFeatureConfig config) {
 		// Layer 0
 		placeLeaves(-1, 0, 0, worldIn, rand, position, set2, box, config, false);
 		placeLeaves(0, 0, -1, worldIn, rand, position, set2, box, config, false);

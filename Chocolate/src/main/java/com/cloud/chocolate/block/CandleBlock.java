@@ -34,6 +34,7 @@ public class CandleBlock extends FallingBlock {
 		this.setDefaultState(this.stateContainer.getBaseState().with(CANDLES, Integer.valueOf(1)));
 	}
 	
+	/*
 	public int getLightValue(BlockState state) {
 		switch(state.get(CANDLES)) {
 			case 1:
@@ -49,6 +50,7 @@ public class CandleBlock extends FallingBlock {
 				return 15;
 		}
 	}
+	*/
 	
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {

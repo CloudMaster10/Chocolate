@@ -29,19 +29,18 @@ public abstract class ModAbstractSignBlock extends AbstractSignBlock
 		this.location = new ResourceLocation(Chocolate.MOD_ID, "textures/entity/signs/" + type + ".png");
 	}
 	
-	@Override
 	public boolean hasTileEntity()
 	{
 		return true;
 	}
 	
+	/*
 	@Override
 	public TileEntity createNewTileEntity(IBlockReader world)
 	{
-		//return new ModSignTileEntity();
-		//return ModTileEntities.sign.create();
 		return ModTileEntities.SIGN.get().create();
 	}
+	*/
 
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)

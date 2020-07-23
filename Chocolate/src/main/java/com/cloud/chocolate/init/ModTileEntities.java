@@ -21,9 +21,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = Chocolate.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModTileEntities
 {
-	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Chocolate.MOD_ID);
+	//public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<TileEntityType<?>>(ForgeRegistries.TILE_ENTITIES, Chocolate.MOD_ID);
 
-	public static final RegistryObject<TileEntityType<ModSignTileEntity>> SIGN = createTileEntity("sign", ModSignTileEntity::new, () -> collectSignBlocks());
+	//public static final RegistryObject<TileEntityType<ModSignTileEntity>> SIGN = createTileEntity("sign", ModSignTileEntity::new, () -> collectSignBlocks());
 	
 	/*
 	public static TileEntityType<ModSignTileEntity> sign;
@@ -84,10 +84,12 @@ public class ModTileEntities
     }
     */
 	
+	/*
 	public static <T extends TileEntity> RegistryObject<TileEntityType<T>> createTileEntity(String name, Supplier<? extends T> tileEntity, Supplier<Block[]> validBlocks)
 	{
 		return TILE_ENTITIES.register(name, () -> new TileEntityType<>(tileEntity, Sets.newHashSet(validBlocks.get()), null));
 	}
+	*/
     
     private static Block[] collectSignBlocks()
     {

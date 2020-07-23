@@ -22,7 +22,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -113,10 +113,10 @@ public class StompingEnchantment extends Enchantment
                         	// Play stomp sound and spawn particles at the location of the stomper
                             if(stomperEntity.world instanceof ServerWorld)
                             {
-                                // Spawn particles at stopmer
-                            	BlockState state = stomperEntity.world.getBlockState(stomperEntity.getPosition().down());
                                 ServerWorld serverWorld = (ServerWorld) stomperEntity.world;
-                                serverWorld.spawnParticle(new BlockParticleData(ParticleTypes.BLOCK, state), stomperEntity.getPosX(), stomperEntity.getPosY(), stomperEntity.getPosZ(), (int) (100 * strengthFactor), 0, 0.2, 0, 750.0 * strengthFactor);
+                                
+                                // Spawn particles at stopmer
+                                serverWorld.spawnParticle(ParticleTypes.CLOUD, stomperEntity.getPosX(), stomperEntity.getPosY(), stomperEntity.getPosZ(), (int) (20 * strengthFactor), 0, 0.2, 0, strengthFactor / 15);
                                 
                                 // Play stomp sound in the appropriate category
                                 SoundCategory soundCategory = SoundCategory.HOSTILE;
@@ -151,7 +151,7 @@ public class StompingEnchantment extends Enchantment
                             	// Cause stomped entity to be recoiled
                             	float distanceFactor = 1.5F - (livingEntity.getDistance(stomperEntity) * 0.2F);
                                 float stompStrength = 0.1F * strengthFactor * distanceFactor;
-                                Vec3d direction = new Vec3d(livingEntity.getPosX() - stomperEntity.getPosX(), 0, livingEntity.getPosZ() - stomperEntity.getPosZ()).normalize();
+                                Vector3d direction = new Vector3d(livingEntity.getPosX() - stomperEntity.getPosX(), 0, livingEntity.getPosZ() - stomperEntity.getPosZ()).normalize();
                                 
                                 livingEntity.setMotion(direction.x * stompStrength, stompStrength * 0.8F, direction.z * stompStrength);
                                 livingEntity.addVelocity(direction.x * stompStrength, stompStrength * 0.8F, direction.z * stompStrength);
