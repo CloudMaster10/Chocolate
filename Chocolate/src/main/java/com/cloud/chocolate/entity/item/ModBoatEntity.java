@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.cloud.chocolate.init.ModBlocks;
-import com.cloud.chocolate.init.ModEntities;
+import com.cloud.chocolate.init.ModEntityTypes;
 import com.cloud.chocolate.init.ModItems;
 
 import net.minecraft.block.Block;
@@ -93,7 +93,7 @@ public class ModBoatEntity extends BoatEntity
 
 	public ModBoatEntity(World worldIn, double x, double y, double z)
 	{
-		this(ModEntities.boat, worldIn);
+		this(ModEntityTypes.BOAT.get(), worldIn);
 		this.setPosition(x, y, z);
 		this.setMotion(Vector3d.ZERO);
 		this.prevPosX = x;
@@ -226,9 +226,9 @@ public class ModBoatEntity extends BoatEntity
 		switch (this.getModBoatType()) {
 		case PALM:
 		default:
-			return ModItems.palm_boat;
+			return ModItems.PALM_BOAT.get();
 		case SAKURA:
-			return ModItems.sakura_boat;
+			return ModItems.SAKURA_BOAT.get();
 		}
 	}
 
@@ -1013,8 +1013,8 @@ public class ModBoatEntity extends BoatEntity
 
 	public static enum Type
 	{
-		PALM(ModBlocks.palm_planks, "palm"),
-		SAKURA(ModBlocks.sakura_planks, "sakura");
+		PALM(ModBlocks.PALM_PLANKS.get(), "palm"),
+		SAKURA(ModBlocks.SAKURA_PLANKS.get(), "sakura");
 
 		private final String name;
 		private final Block block;

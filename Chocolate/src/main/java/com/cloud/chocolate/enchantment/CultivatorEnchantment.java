@@ -63,7 +63,7 @@ public class CultivatorEnchantment extends Enchantment
     {
         if(!stack.isEmpty())
         {
-	        if(EnchantmentHelper.getEnchantments(stack).containsKey(ModEnchantments.cultivator))
+	        if(EnchantmentHelper.getEnchantments(stack).containsKey(ModEnchantments.CULTIVATOR.get()))
 	        {
 		        
 		        if(face != Direction.DOWN && !player.isCrouching())

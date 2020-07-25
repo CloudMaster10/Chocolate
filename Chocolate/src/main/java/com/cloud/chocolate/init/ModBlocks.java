@@ -1,18 +1,16 @@
 package com.cloud.chocolate.init;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.cloud.chocolate.Chocolate;
 import com.cloud.chocolate.block.CandleBlock;
-import com.cloud.chocolate.block.ModStandingSignBlock;
-import com.cloud.chocolate.block.ModWallSignBlock;
 import com.cloud.chocolate.block.PalmFrondsBlock;
 import com.cloud.chocolate.block.PalmSaplingBlock;
 import com.cloud.chocolate.block.ShortGrassBlock;
 import com.cloud.chocolate.block.trees.PalmTree;
 import com.cloud.chocolate.block.trees.SakuraTree;
-import com.cloud.chocolate.item.ModSignItem;
-import com.mojang.datafixers.util.Pair;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
@@ -41,344 +39,217 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.util.Direction;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-//@ObjectHolder(Chocolate.MOD_ID)
 @Mod.EventBusSubscriber(modid = Chocolate.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks
 {	
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Chocolate.MOD_ID);
+	
 	// Soul Sandstone
-	public static Block soul_sandstone;
-	public static Block soul_sandstone_slab;
-	public static Block soul_sandstone_stairs;
-	public static Block soul_sandstone_wall;
-	public static Block chiseled_soul_sandstone;
-	public static Block cut_soul_sandstone;
-	public static Block cut_soul_sandstone_slab;
-	public static Block smooth_soul_sandstone;
-	public static Block smooth_soul_sandstone_slab;
-	public static Block smooth_soul_sandstone_stairs;
-	
-	public static Block bamboo_block;
-	public static Block bamboo_slab;
-	public static Block bamboo_stairs;
-	public static Block bamboo_fence;
-	public static Block bamboo_fence_gate;
-	public static Block dried_bamboo_block;
-	public static Block dried_bamboo_slab;
-	public static Block dried_bamboo_stairs;
-	public static Block dried_bamboo_fence;
-	public static Block dried_bamboo_fence_gate;
-	
-	public static Block palm_sapling;
-	public static Block palm_fronds;
-	public static Block palm_log;
-	public static Block palm_wood;
-	public static Block stripped_palm_log;
-	public static Block stripped_palm_wood;
-	public static Block palm_planks;
-	public static Block palm_slab;
-	public static Block palm_stairs;
-	public static Block palm_fence;
-	public static Block palm_fence_gate;
-	public static Block palm_door;
-	public static Block palm_trapdoor;
-	public static Block palm_button;
-	public static Block palm_pressure_plate;
-	public static Pair<ModStandingSignBlock, ModWallSignBlock> palm_sign;
-	//public static Block palm_standing_sign;
-	//public static Block palm_wall_sign;
-	public static Block potted_palm_sapling;
-	
-	public static Block sakura_sapling;
-	public static Block sakura_blossoms;
-	public static Block sakura_log;
-	public static Block sakura_wood;
-	public static Block stripped_sakura_log;
-	public static Block stripped_sakura_wood;
-	public static Block sakura_planks;
-	public static Block sakura_slab;
-	public static Block sakura_stairs;
-	public static Block sakura_fence;
-	public static Block sakura_fence_gate;
-	public static Block sakura_door;
-	public static Block sakura_trapdoor;
-	public static Block sakura_button;
-	public static Block sakura_pressure_plate;
-	public static Pair<ModStandingSignBlock, ModWallSignBlock> sakura_sign;
-	//public static Block sakura_standing_sign;
-	//public static Block sakura_wall_sign;
-	public static Block potted_sakura_sapling;
-	
-	public static Block framed_glass;
-	public static Block framed_white_stained_glass;
-	public static Block framed_orange_stained_glass;
-	public static Block framed_magenta_stained_glass;
-	public static Block framed_light_blue_stained_glass;
-	public static Block framed_yellow_stained_glass;
-	public static Block framed_lime_stained_glass;
-	public static Block framed_pink_stained_glass;
-	public static Block framed_gray_stained_glass;
-	public static Block framed_light_gray_stained_glass;
-	public static Block framed_cyan_stained_glass;
-	public static Block framed_purple_stained_glass;
-	public static Block framed_blue_stained_glass;
-	public static Block framed_brown_stained_glass;
-	public static Block framed_green_stained_glass;
-	public static Block framed_red_stained_glass;
-	public static Block framed_black_stained_glass;
-	public static Block framed_glass_pane;
-	public static Block framed_white_stained_glass_pane;
-	public static Block framed_orange_stained_glass_pane;
-	public static Block framed_magenta_stained_glass_pane;
-	public static Block framed_light_blue_stained_glass_pane;
-	public static Block framed_yellow_stained_glass_pane;
-	public static Block framed_lime_stained_glass_pane;
-	public static Block framed_pink_stained_glass_pane;
-	public static Block framed_gray_stained_glass_pane;
-	public static Block framed_light_gray_stained_glass_pane;
-	public static Block framed_cyan_stained_glass_pane;
-	public static Block framed_purple_stained_glass_pane;
-	public static Block framed_blue_stained_glass_pane;
-	public static Block framed_brown_stained_glass_pane;
-	public static Block framed_green_stained_glass_pane;
-	public static Block framed_red_stained_glass_pane;
-	public static Block framed_black_stained_glass_pane;
-	
-	public static Block candle;
-	
-	public static Block short_grass;
-	
-	
+	public static final RegistryObject<Block> SOUL_SANDSTONE = BLOCKS.register("soul_sandstone", () -> new Block(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(0.8F).harvestTool(ToolType.PICKAXE)));                                                                                                                                                                                                                                  
+	public static final RegistryObject<Block> SOUL_SANDSTONE_SLAB = BLOCKS.register("soul_sandstone_slab", () -> new SlabBlock(Block.Properties.from(SOUL_SANDSTONE.get())));                                                                                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> SOUL_SANDSTONE_STAIRS = BLOCKS.register("soul_sandstone_stairs", () -> new StairsBlock(() -> SOUL_SANDSTONE.get().getDefaultState(), Block.Properties.from(SOUL_SANDSTONE.get())));                                                                                                                                                                                                                                                       
+	public static final RegistryObject<Block> SOUL_SANDSTONE_WALL = BLOCKS.register("soul_sandstone_wall", () -> new WallBlock(Block.Properties.from(SOUL_SANDSTONE.get())));                                                                                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> CHISELED_SOUL_SANDSTONE = BLOCKS.register("chiseled_soul_sandstone", () -> new Block(Block.Properties.from(SOUL_SANDSTONE.get())));                                                                                                                                                                                                                                                                                                 
+	public static final RegistryObject<Block> CUT_SOUL_SANDSTONE = BLOCKS.register("cut_soul_sandstone", () -> new Block(Block.Properties.from(SOUL_SANDSTONE.get())));                                                                                                                                                                                                                                                                                                           
+	public static final RegistryObject<Block> CUT_SOUL_SANDSTONE_SLAB = BLOCKS.register("cut_soul_sandstone_slab", () -> new SlabBlock(Block.Properties.from(SOUL_SANDSTONE.get())));                                                                                                                                                                                                                                                                                             
+	public static final RegistryObject<Block> SMOOTH_SOUL_SANDSTONE = BLOCKS.register("smooth_soul_sandstone", () -> new Block(Block.Properties.from(SOUL_SANDSTONE.get())));                                                                                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> SMOOTH_SOUL_SANDSTONE_SLAB = BLOCKS.register("smooth_soul_sandstone_slab", () -> new SlabBlock(Block.Properties.from(SOUL_SANDSTONE.get())));                                                                                                                                                                                                                                                                                       
+	public static final RegistryObject<Block> SMOOTH_SOUL_SANDSTONE_STAIRS = BLOCKS.register("smooth_soul_sandstone_stairs", () -> new StairsBlock(() -> SMOOTH_SOUL_SANDSTONE.get().getDefaultState(), Block.Properties.from(SOUL_SANDSTONE.get())));                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    // Bamboo                                                                                                                                                                                          
+	public static final RegistryObject<Block> BAMBOO_BLOCK = BLOCKS.register("bamboo_block", () -> new RotatedPillarBlock(Block.Properties.create(Material.BAMBOO, MaterialColor.GRASS).hardnessAndResistance(1.0F).sound(SoundType.BAMBOO)));                                                                                                                                                                                                                              
+	public static final RegistryObject<Block> BAMBOO_SLAB = BLOCKS.register("bamboo_slab", () -> new SlabBlock(Block.Properties.from(BAMBOO_BLOCK.get())));                                                                                                                                                                                                                                                                                                                       
+	public static final RegistryObject<Block> BAMBOO_STAIRS = BLOCKS.register("bamboo_stairs", () -> new StairsBlock(() -> BAMBOO_BLOCK.get().getDefaultState(), Block.Properties.from(BAMBOO_BLOCK.get())));                                                                                                                                                                                                                                                                           
+	public static final RegistryObject<Block> BAMBOO_FENCE = BLOCKS.register("bamboo_fence", () -> new FenceBlock(Block.Properties.from(BAMBOO_BLOCK.get())));                                                                                                                                                                                                                                                                                                                    
+	public static final RegistryObject<Block> BAMBOO_FENCE_GATE = BLOCKS.register("bamboo_fence_gate", () -> new FenceGateBlock(Block.Properties.from(BAMBOO_BLOCK.get())));                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	public static final RegistryObject<Block> DRIED_BAMBOO_BLOCK = BLOCKS.register("dried_bamboo_block", () -> new RotatedPillarBlock(Block.Properties.create(Material.BAMBOO, MaterialColor.SAND).hardnessAndResistance(1.0F).sound(SoundType.BAMBOO)));                                                                                                                                                                                                                   
+	public static final RegistryObject<Block> DRIED_BAMBOO_SLAB = BLOCKS.register("dried_bamboo_slab", () -> new SlabBlock(Block.Properties.from(DRIED_BAMBOO_BLOCK.get())));                                                                                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> DRIED_BAMBOO_STAIRS = BLOCKS.register("dried_bamboo_stairs", () -> new StairsBlock(() -> DRIED_BAMBOO_BLOCK.get().getDefaultState(), Block.Properties.from(DRIED_BAMBOO_BLOCK.get())));                                                                                                                                                                                                                                                   
+	public static final RegistryObject<Block> DRIED_BAMBOO_FENCE = BLOCKS.register("dried_bamboo_fence", () -> new FenceBlock(Block.Properties.from(DRIED_BAMBOO_BLOCK.get())));                                                                                                                                                                                                                                                                                                  
+	public static final RegistryObject<Block> DRIED_BAMBOO_FENCE_GATE = BLOCKS.register("dried_bamboo_fence_gate", () -> new FenceGateBlock(Block.Properties.from(DRIED_BAMBOO_BLOCK.get())));                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	// Palm                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+	public static final RegistryObject<Block> PALM_SAPLING = BLOCKS.register("palm_sapling", () -> new PalmSaplingBlock(new PalmTree(), Block.Properties.from(Blocks.OAK_SAPLING)));                                                                                                                                                                                                                                                                                            
+	public static final RegistryObject<Block> PALM_FRONDS = BLOCKS.register("palm_fronds", () -> new PalmFrondsBlock(Block.Properties.from(Blocks.OAK_LEAVES)));                                                                                                                                                                                                                                                                                                                
+	public static final RegistryObject<Block> PALM_LOG = BLOCKS.register("palm_log", () -> Blocks.func_235430_a_(MaterialColor.WHITE_TERRACOTTA, MaterialColor.LIGHT_GRAY_TERRACOTTA));                                                                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> PALM_WOOD = BLOCKS.register("palm_wood", () -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_GRAY_TERRACOTTA).hardnessAndResistance(2.0F).sound(SoundType.WOOD)));                                                                                                                                                                                                                        
+	public static final RegistryObject<Block> STRIPPED_PALM_LOG = BLOCKS.register("stripped_palm_log", () -> Blocks.func_235430_a_(MaterialColor.WHITE_TERRACOTTA, MaterialColor.WHITE_TERRACOTTA));                                                                                                                                                                                                                                                                        
+	public static final RegistryObject<Block> STRIPPED_PALM_WOOD = BLOCKS.register("stripped_palm_wood", () -> new RotatedPillarBlock(Block.Properties.from(STRIPPED_PALM_LOG.get())));                                                                                                                                                                                                                                                                                           
+	public static final RegistryObject<Block> PALM_PLANKS = BLOCKS.register("palm_planks", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));                                                                                                                                                                                                                                
+	public static final RegistryObject<Block> PALM_SLAB = BLOCKS.register("palm_slab", () -> new SlabBlock(Block.Properties.from(PALM_PLANKS.get())));                                                                                                                                                                                                                                                                                                                            
+	public static final RegistryObject<Block> PALM_STAIRS = BLOCKS.register("palm_stairs", () -> new StairsBlock(() -> PALM_PLANKS.get().getDefaultState(), Block.Properties.from(PALM_PLANKS.get())));                                                                                                                                                                                                                                                                                 
+	public static final RegistryObject<Block> PALM_FENCE = BLOCKS.register("palm_fence", () -> new FenceBlock(Block.Properties.from(PALM_PLANKS.get())));                                                                                                                                                                                                                                                                                                                         
+	public static final RegistryObject<Block> PALM_FENCE_GATE = BLOCKS.register("palm_fence_gate", () -> new FenceGateBlock(Block.Properties.from(PALM_PLANKS.get())));                                                                                                                                                                                                                                                                                                                 
+	public static final RegistryObject<Block> PALM_DOOR = BLOCKS.register("palm_door", () -> new DoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()));                                                                                                                                                                                                                                 
+	public static final RegistryObject<Block> PALM_TRAPDOOR = BLOCKS.register("palm_trapdoor", () -> new TrapDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()));                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> PALM_BUTTON = BLOCKS.register("palm_button", () -> new WoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)));                                                                                                                                                                                                                                  
+	public static final RegistryObject<Block> PALM_PRESSURE_PLATE = BLOCKS.register("palm_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)));                                                                                                                                             
+	public static final RegistryObject<Block> POTTED_PALM_SAPLING = BLOCKS.register("potted_palm_sapling", () -> new FlowerPotBlock(PALM_SAPLING.get(), Block.Properties.from(Blocks.FLOWER_POT)));                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	// Sakura                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+	public static final RegistryObject<Block> SAKURA_SAPLING = BLOCKS.register("sakura_sapling", () -> new SaplingBlock(new SakuraTree(), Block.Properties.create(Material.PLANTS, MaterialColor.PINK).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT)) {});                                                                                                                                                                           
+	public static final RegistryObject<Block> SAKURA_BLOSSOMS = BLOCKS.register("sakura_blossoms", () -> new LeavesBlock(Block.Properties.create(Material.LEAVES, MaterialColor.PINK).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid()));                                                                                                                                                                                                           
+	public static final RegistryObject<Block> SAKURA_LOG = BLOCKS.register("sakura_log", () -> Blocks.func_235430_a_(MaterialColor.PINK_TERRACOTTA, MaterialColor.GRAY));                                                                                                                                                                                                                                                                                                   
+	public static final RegistryObject<Block> SAKURA_WOOD = BLOCKS.register("sakura_wood", () -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.GRAY).hardnessAndResistance(2.0F).sound(SoundType.WOOD)));                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> STRIPPED_SAKURA_LOG = BLOCKS.register("stripped_sakura_log", () -> Blocks.func_235430_a_(MaterialColor.PINK_TERRACOTTA, MaterialColor.PINK_TERRACOTTA));                                                                                                                                                                                                                                                                      
+	public static final RegistryObject<Block> STRIPPED_SAKURA_WOOD = BLOCKS.register("stripped_sakura_wood", () -> new RotatedPillarBlock(Block.Properties.from(STRIPPED_SAKURA_LOG.get())));                                                                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> SAKURA_PLANKS = BLOCKS.register("sakura_planks", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.PINK_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)));                                                                                                                                                                                                                             
+	public static final RegistryObject<Block> SAKURA_SLAB = BLOCKS.register("sakura_slab", () -> new SlabBlock(Block.Properties.from(SAKURA_PLANKS.get())));                                                                                                                                                                                                                                                                                                                      
+	public static final RegistryObject<Block> SAKURA_STAIRS = BLOCKS.register("sakura_stairs", () -> new StairsBlock(() -> SAKURA_PLANKS.get().getDefaultState(), Block.Properties.from(SAKURA_PLANKS.get())));                                                                                                                                                                                                                                                                         
+	public static final RegistryObject<Block> SAKURA_FENCE = BLOCKS.register("sakura_fence", () -> new FenceBlock(Block.Properties.from(SAKURA_PLANKS.get())));                                                                                                                                                                                                                                                                                                                   
+	public static final RegistryObject<Block> SAKURA_FENCE_GATE = BLOCKS.register("sakura_fence_gate", () -> new FenceGateBlock(Block.Properties.from(SAKURA_PLANKS.get())));                                                                                                                                                                                                                                                                                                           
+	public static final RegistryObject<Block> SAKURA_DOOR = BLOCKS.register("sakura_door", () -> new DoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.PINK_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()));                                                                                                                                                                                                                              
+	public static final RegistryObject<Block> SAKURA_TRAPDOOR = BLOCKS.register("sakura_trapdoor", () -> new TrapDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.PINK_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()));                                                                                                                                                                                                                  
+	public static final RegistryObject<Block> SAKURA_BUTTON = BLOCKS.register("sakura_button", () -> new WoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)));                                                                                                                                                                                                                              
+	public static final RegistryObject<Block> SAKURA_PRESSURE_PLATE = BLOCKS.register("sakura_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD, MaterialColor.PINK_TERRACOTTA).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)));                                                                                                                                          
+	public static final RegistryObject<Block> POTTED_SAKURA_SAPLING = BLOCKS.register("potted_sakura_sapling", () -> new FlowerPotBlock(SAKURA_SAPLING.get(), Block.Properties.from(Blocks.FLOWER_POT)));                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    // Framed Glass                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+	public static final RegistryObject<Block> FRAMED_GLASS = BLOCKS.register("framed_glass", () -> new GlassBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()));                                                                                                                                                                                                                                                  
+	public static final RegistryObject<Block> FRAMED_WHITE_STAINED_GLASS = BLOCKS.register("framed_white_stained_glass", () -> new StainedGlassBlock(DyeColor.WHITE, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                                 
+	public static final RegistryObject<Block> FRAMED_ORANGE_STAINED_GLASS = BLOCKS.register("framed_orange_stained_glass", () -> new StainedGlassBlock(DyeColor.ORANGE, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                              
+	public static final RegistryObject<Block> FRAMED_MAGENTA_STAINED_GLASS = BLOCKS.register("framed_magenta_stained_glass", () -> new StainedGlassBlock(DyeColor.MAGENTA, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                           
+	public static final RegistryObject<Block> FRAMED_LIGHT_BLUE_STAINED_GLASS = BLOCKS.register("framed_light_blue_stained_glass", () -> new StainedGlassBlock(DyeColor.LIGHT_BLUE, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                  
+	public static final RegistryObject<Block> FRAMED_YELLOW_STAINED_GLASS = BLOCKS.register("framed_yellow_stained_glass", () -> new StainedGlassBlock(DyeColor.YELLOW, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                              
+	public static final RegistryObject<Block> FRAMED_LIME_STAINED_GLASS = BLOCKS.register("framed_lime_stained_glass", () -> new StainedGlassBlock(DyeColor.LIME, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                                    
+	public static final RegistryObject<Block> FRAMED_PINK_STAINED_GLASS = BLOCKS.register("framed_pink_stained_glass", () -> new StainedGlassBlock(DyeColor.PINK, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                                    
+	public static final RegistryObject<Block> FRAMED_GRAY_STAINED_GLASS = BLOCKS.register("framed_gray_stained_glass", () -> new StainedGlassBlock(DyeColor.GRAY, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                                    
+	public static final RegistryObject<Block> FRAMED_LIGHT_GRAY_STAINED_GLASS = BLOCKS.register("framed_light_gray_stained_glass", () -> new StainedGlassBlock(DyeColor.LIGHT_GRAY, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                  
+	public static final RegistryObject<Block> FRAMED_CYAN_STAINED_GLASS = BLOCKS.register("framed_cyan_stained_glass", () -> new StainedGlassBlock(DyeColor.CYAN, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                                    
+	public static final RegistryObject<Block> FRAMED_PURPLE_STAINED_GLASS = BLOCKS.register("framed_purple_stained_glass", () -> new StainedGlassBlock(DyeColor.PURPLE, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                              
+	public static final RegistryObject<Block> FRAMED_BLUE_STAINED_GLASS = BLOCKS.register("framed_blue_stained_glass", () -> new StainedGlassBlock(DyeColor.BLUE, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                                    
+	public static final RegistryObject<Block> FRAMED_BROWN_STAINED_GLASS = BLOCKS.register("framed_brown_stained_glass", () -> new StainedGlassBlock(DyeColor.BROWN, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                                 
+	public static final RegistryObject<Block> FRAMED_GREEN_STAINED_GLASS = BLOCKS.register("framed_green_stained_glass", () -> new StainedGlassBlock(DyeColor.GREEN, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                                 
+	public static final RegistryObject<Block> FRAMED_RED_STAINED_GLASS = BLOCKS.register("framed_red_stained_glass", () -> new StainedGlassBlock(DyeColor.RED, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                                       
+	public static final RegistryObject<Block> FRAMED_BLACK_STAINED_GLASS = BLOCKS.register("framed_black_stained_glass", () -> new StainedGlassBlock(DyeColor.BLACK, Block.Properties.from(FRAMED_GLASS.get())));                                                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	public static final RegistryObject<Block> FRAMED_GLASS_PANE = BLOCKS.register("framed_glass_pane", () -> new PaneBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()) {});                                                                                                                                                                                                                                          
+	public static final RegistryObject<Block> FRAMED_WHITE_STAINED_GLASS_PANE = BLOCKS.register("framed_white_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.WHITE, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                                  
+	public static final RegistryObject<Block> FRAMED_ORANGE_STAINED_GLASS_PANE = BLOCKS.register("framed_orange_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.ORANGE, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                               
+	public static final RegistryObject<Block> FRAMED_MAGENTA_STAINED_GLASS_PANE = BLOCKS.register("framed_magenta_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.MAGENTA, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                            
+	public static final RegistryObject<Block> FRAMED_LIGHT_BLUE_STAINED_GLASS_PANE = BLOCKS.register("framed_light_blue_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.LIGHT_BLUE, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                   
+	public static final RegistryObject<Block> FRAMED_YELLOW_STAINED_GLASS_PANE = BLOCKS.register("framed_yellow_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.YELLOW, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                               
+	public static final RegistryObject<Block> FRAMED_LIME_STAINED_GLASS_PANE = BLOCKS.register("framed_lime_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.LIME, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> FRAMED_PINK_STAINED_GLASS_PANE = BLOCKS.register("framed_pink_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.PINK, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> FRAMED_GRAY_STAINED_GLASS_PANE = BLOCKS.register("framed_gray_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.GRAY, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> FRAMED_LIGHT_GRAY_STAINED_GLASS_PANE = BLOCKS.register("framed_light_gray_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.LIGHT_GRAY, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                   
+	public static final RegistryObject<Block> FRAMED_CYAN_STAINED_GLASS_PANE = BLOCKS.register("framed_cyan_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.CYAN, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> FRAMED_PURPLE_STAINED_GLASS_PANE = BLOCKS.register("framed_purple_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.PURPLE, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                               
+	public static final RegistryObject<Block> FRAMED_BLUE_STAINED_GLASS_PANE = BLOCKS.register("framed_blue_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.BLUE, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                                     
+	public static final RegistryObject<Block> FRAMED_BROWN_STAINED_GLASS_PANE = BLOCKS.register("framed_brown_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.BROWN, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                                  
+	public static final RegistryObject<Block> FRAMED_GREEN_STAINED_GLASS_PANE = BLOCKS.register("framed_green_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.GREEN, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                                  
+	public static final RegistryObject<Block> FRAMED_RED_STAINED_GLASS_PANE = BLOCKS.register("framed_red_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.RED, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                                        
+	public static final RegistryObject<Block> FRAMED_BLACK_STAINED_GLASS_PANE = BLOCKS.register("framed_black_stained_glass_pane", () -> new StainedGlassPaneBlock(DyeColor.BLACK, Block.Properties.from(FRAMED_GLASS_PANE.get())));                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	// Miscellaneous                                                                                                                                                                                                                                    
+	public static final RegistryObject<Block> CANDLE = BLOCKS.register("candle", () -> new CandleBlock(Block.Properties.create(Material.CLAY, MaterialColor.GOLD).hardnessAndResistance(0.2F).setLightLevel((p_235447_0_) -> { return 12; }).sound(SoundType.CLOTH)));                                                                                                                                                                                                                    
+	public static final RegistryObject<Block> SHORT_GRASS = BLOCKS.register("short_grass", () -> new ShortGrassBlock(Block.Properties.from(Blocks.GRASS)));                                                                                                           
+
 	@SubscribeEvent
-	public static void registerBlocks(RegistryEvent.Register<Block> event)
-	{
-		// Soul Sandstone
-		soul_sandstone = registerBlock(new Block(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(0.8F).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS, "soul_sandstone");
-		soul_sandstone_slab = registerBlock(new SlabBlock(Block.Properties.from(soul_sandstone)), ItemGroup.BUILDING_BLOCKS, "soul_sandstone_slab");
-		soul_sandstone_stairs = registerBlock(new StairsBlock(() -> soul_sandstone.getDefaultState(), Block.Properties.from(soul_sandstone)), ItemGroup.BUILDING_BLOCKS, "soul_sandstone_stairs");
-		soul_sandstone_wall = registerBlock(new WallBlock(Block.Properties.from(soul_sandstone)), ItemGroup.BUILDING_BLOCKS, "soul_sandstone_wall");
-		chiseled_soul_sandstone = registerBlock(new Block(Block.Properties.from(soul_sandstone)), ItemGroup.BUILDING_BLOCKS, "chiseled_soul_sandstone");
-		cut_soul_sandstone = registerBlock(new Block(Block.Properties.from(soul_sandstone)), ItemGroup.BUILDING_BLOCKS, "cut_soul_sandstone");
-		cut_soul_sandstone_slab = registerBlock(new SlabBlock(Block.Properties.from(soul_sandstone)), ItemGroup.BUILDING_BLOCKS, "cut_soul_sandstone_slab");
-		smooth_soul_sandstone = registerBlock(new Block(Block.Properties.from(soul_sandstone)), ItemGroup.BUILDING_BLOCKS, "smooth_soul_sandstone");
-		smooth_soul_sandstone_slab = registerBlock(new SlabBlock(Block.Properties.from(soul_sandstone)), ItemGroup.BUILDING_BLOCKS, "smooth_soul_sandstone_slab");
-		smooth_soul_sandstone_stairs = registerBlock(new StairsBlock(() -> smooth_soul_sandstone.getDefaultState(), Block.Properties.from(soul_sandstone)), ItemGroup.BUILDING_BLOCKS, "smooth_soul_sandstone_stairs");
+	public static void registerBlockItems(RegistryEvent.Register<Item> event) {
+		List<RegistryObject<? extends Block>> buildingBlocks = Arrays.asList(
+				SOUL_SANDSTONE, SOUL_SANDSTONE_SLAB, SOUL_SANDSTONE_STAIRS, SOUL_SANDSTONE_WALL, CHISELED_SOUL_SANDSTONE, CUT_SOUL_SANDSTONE, CUT_SOUL_SANDSTONE_SLAB, SMOOTH_SOUL_SANDSTONE, SMOOTH_SOUL_SANDSTONE_SLAB, SMOOTH_SOUL_SANDSTONE_STAIRS,
+				BAMBOO_BLOCK, BAMBOO_SLAB, BAMBOO_STAIRS, BAMBOO_FENCE, DRIED_BAMBOO_BLOCK, DRIED_BAMBOO_SLAB, DRIED_BAMBOO_STAIRS, DRIED_BAMBOO_FENCE,
+				PALM_LOG, PALM_WOOD, STRIPPED_PALM_LOG, STRIPPED_PALM_WOOD, PALM_PLANKS, PALM_SLAB, PALM_STAIRS, PALM_FENCE,
+				SAKURA_LOG, SAKURA_WOOD, STRIPPED_SAKURA_LOG, STRIPPED_SAKURA_WOOD, SAKURA_PLANKS, SAKURA_SLAB, SAKURA_STAIRS, SAKURA_FENCE,
+				FRAMED_GLASS, FRAMED_WHITE_STAINED_GLASS, FRAMED_ORANGE_STAINED_GLASS, FRAMED_MAGENTA_STAINED_GLASS, FRAMED_LIGHT_BLUE_STAINED_GLASS, FRAMED_YELLOW_STAINED_GLASS, FRAMED_LIME_STAINED_GLASS, FRAMED_PINK_STAINED_GLASS, FRAMED_GRAY_STAINED_GLASS,
+				FRAMED_LIGHT_GRAY_STAINED_GLASS, FRAMED_CYAN_STAINED_GLASS, FRAMED_PURPLE_STAINED_GLASS, FRAMED_BLUE_STAINED_GLASS, FRAMED_BROWN_STAINED_GLASS, FRAMED_GREEN_STAINED_GLASS, FRAMED_RED_STAINED_GLASS, FRAMED_BLACK_STAINED_GLASS
+				);
 		
-		// Bamboo
-		bamboo_block = registerBlock(new RotatedPillarBlock(Block.Properties.create(Material.BAMBOO, MaterialColor.GRASS).hardnessAndResistance(1.0F).sound(SoundType.BAMBOO)), ItemGroup.BUILDING_BLOCKS, "bamboo_block");
-		bamboo_slab = registerBlock(new SlabBlock(Block.Properties.from(bamboo_block)), ItemGroup.BUILDING_BLOCKS, "bamboo_slab");
-		bamboo_stairs = registerBlock(new StairsBlock(() -> bamboo_block.getDefaultState(), Block.Properties.from(bamboo_block)), ItemGroup.BUILDING_BLOCKS, "bamboo_stairs");
-		bamboo_fence = registerBlock(new FenceBlock(Block.Properties.from(bamboo_block)), ItemGroup.BUILDING_BLOCKS, "bamboo_fence");
-		bamboo_fence_gate = registerBlock(new FenceGateBlock(Block.Properties.from(bamboo_block)), ItemGroup.REDSTONE, "bamboo_fence_gate");
-		dried_bamboo_block = registerBlock(new RotatedPillarBlock(Block.Properties.create(Material.BAMBOO, MaterialColor.SAND).hardnessAndResistance(1.0F).sound(SoundType.BAMBOO)), ItemGroup.BUILDING_BLOCKS, "dried_bamboo_block");
-		dried_bamboo_slab = registerBlock(new SlabBlock(Block.Properties.from(dried_bamboo_block)), ItemGroup.BUILDING_BLOCKS, "dried_bamboo_slab");
-		dried_bamboo_stairs = registerBlock(new StairsBlock(() -> dried_bamboo_block.getDefaultState(), Block.Properties.from(dried_bamboo_block)), ItemGroup.BUILDING_BLOCKS, "dried_bamboo_stairs");
-		dried_bamboo_fence = registerBlock(new FenceBlock(Block.Properties.from(dried_bamboo_block)), ItemGroup.BUILDING_BLOCKS, "dried_bamboo_fence");
-		dried_bamboo_fence_gate = registerBlock(new FenceGateBlock(Block.Properties.from(dried_bamboo_block)), ItemGroup.REDSTONE, "dried_bamboo_fence_gate");
+		List<RegistryObject<? extends Block>> decorations = Arrays.asList(
+				PALM_SAPLING, PALM_FRONDS,
+				SAKURA_SAPLING, SAKURA_BLOSSOMS,
+				FRAMED_GLASS_PANE, FRAMED_WHITE_STAINED_GLASS_PANE, FRAMED_ORANGE_STAINED_GLASS_PANE, FRAMED_MAGENTA_STAINED_GLASS_PANE, FRAMED_LIGHT_BLUE_STAINED_GLASS_PANE, FRAMED_YELLOW_STAINED_GLASS_PANE, FRAMED_LIME_STAINED_GLASS_PANE, FRAMED_PINK_STAINED_GLASS_PANE, FRAMED_GRAY_STAINED_GLASS_PANE,
+				FRAMED_LIGHT_GRAY_STAINED_GLASS_PANE, FRAMED_CYAN_STAINED_GLASS_PANE, FRAMED_PURPLE_STAINED_GLASS_PANE, FRAMED_BLUE_STAINED_GLASS_PANE, FRAMED_BROWN_STAINED_GLASS_PANE, FRAMED_GREEN_STAINED_GLASS_PANE, FRAMED_RED_STAINED_GLASS_PANE, FRAMED_BLACK_STAINED_GLASS_PANE,
+				CANDLE, SHORT_GRASS
+				);
 		
-		// Palm
-		palm_sapling = registerBlock(new PalmSaplingBlock(new PalmTree(), Block.Properties.from(Blocks.OAK_SAPLING)), ItemGroup.DECORATIONS, "palm_sapling");
-		palm_fronds = registerBlock(new PalmFrondsBlock(Block.Properties.from(Blocks.OAK_LEAVES)), ItemGroup.DECORATIONS, "palm_fronds");
-		palm_log = registerBlock(Blocks.func_235430_a_(MaterialColor.WHITE_TERRACOTTA, MaterialColor.LIGHT_GRAY_TERRACOTTA), ItemGroup.BUILDING_BLOCKS, "palm_log");
-		palm_wood = registerBlock(new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_GRAY_TERRACOTTA).hardnessAndResistance(2.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "palm_wood");
-		stripped_palm_log = registerBlock(Blocks.func_235430_a_(MaterialColor.WHITE_TERRACOTTA, MaterialColor.WHITE_TERRACOTTA), ItemGroup.BUILDING_BLOCKS, "stripped_palm_log");
-		stripped_palm_wood = registerBlock(new RotatedPillarBlock(Block.Properties.from(stripped_palm_log)), ItemGroup.BUILDING_BLOCKS, "stripped_palm_wood");
-		palm_planks = registerBlock(new Block(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "palm_planks");
-		palm_slab = registerBlock(new SlabBlock(Block.Properties.from(palm_planks)), ItemGroup.BUILDING_BLOCKS, "palm_slab");
-		palm_stairs = registerBlock(new StairsBlock(() -> palm_planks.getDefaultState(), Block.Properties.from(palm_planks)), ItemGroup.BUILDING_BLOCKS, "palm_stairs");
-		palm_fence = registerBlock(new FenceBlock(Block.Properties.from(palm_planks)), ItemGroup.BUILDING_BLOCKS, "palm_fence");
-		palm_fence_gate = registerBlock(new FenceGateBlock(Block.Properties.from(palm_planks)), ItemGroup.REDSTONE, "palm_fence_gate");
-		palm_door = registerBlock(new DoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()), ItemGroup.REDSTONE, "palm_door");
-		palm_trapdoor = registerBlock(new TrapDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()), ItemGroup.REDSTONE, "palm_trapdoor");
-		palm_button = registerBlock(new WoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)), ItemGroup.REDSTONE, "palm_button");
-		palm_pressure_plate = registerBlock(new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)), ItemGroup.REDSTONE, "palm_pressure_plate");
-		palm_sign = registerSignBlock(MaterialColor.WHITE_TERRACOTTA, "palm");
-		//palm_standing_sign = registerBlock(new ModStandingSignBlock(Block.Properties.from(Blocks.OAK_SIGN), "palm"), "palm_sign");
-		//palm_wall_sign = registerBlock(new ModWallSignBlock(Block.Properties.from(Blocks.OAK_WALL_SIGN), "palm"), "palm_wall_sign");
-		potted_palm_sapling = registerBlock(new FlowerPotBlock(palm_sapling, Block.Properties.from(Blocks.FLOWER_POT)), "potted_palm_sapling");
+		List<RegistryObject<? extends Block>> redstone = Arrays.asList(
+				BAMBOO_FENCE_GATE, DRIED_BAMBOO_FENCE_GATE,
+				PALM_FENCE_GATE, PALM_TRAPDOOR, PALM_BUTTON, PALM_PRESSURE_PLATE,
+				SAKURA_FENCE_GATE, SAKURA_TRAPDOOR, SAKURA_BUTTON, SAKURA_PRESSURE_PLATE
+				);
 		
-		// Sakura
-		sakura_sapling = registerBlock(new SaplingBlock(new SakuraTree(), Block.Properties.create(Material.PLANTS, MaterialColor.PINK).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT)) {}, ItemGroup.DECORATIONS, "sakura_sapling");
-		sakura_blossoms = registerBlock(new LeavesBlock(Block.Properties.create(Material.LEAVES, MaterialColor.PINK).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid()), ItemGroup.DECORATIONS, "sakura_blossoms");
-		sakura_log = registerBlock(Blocks.func_235430_a_(MaterialColor.PINK_TERRACOTTA, MaterialColor.GRAY), ItemGroup.BUILDING_BLOCKS, "sakura_log");
-		sakura_wood = registerBlock(new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.GRAY).hardnessAndResistance(2.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "sakura_wood");
-		stripped_sakura_log = registerBlock(Blocks.func_235430_a_(MaterialColor.PINK_TERRACOTTA, MaterialColor.PINK_TERRACOTTA), ItemGroup.BUILDING_BLOCKS, "stripped_sakura_log");
-		stripped_sakura_wood = registerBlock(new RotatedPillarBlock(Block.Properties.from(stripped_sakura_log)), ItemGroup.BUILDING_BLOCKS, "stripped_sakura_wood");
-		sakura_planks = registerBlock(new Block(Block.Properties.create(Material.WOOD, MaterialColor.PINK_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)), ItemGroup.BUILDING_BLOCKS, "sakura_planks");
-		sakura_slab = registerBlock(new SlabBlock(Block.Properties.from(sakura_planks)), ItemGroup.BUILDING_BLOCKS, "sakura_slab");
-		sakura_stairs = registerBlock(new StairsBlock(() -> sakura_planks.getDefaultState(), Block.Properties.from(sakura_planks)), ItemGroup.BUILDING_BLOCKS, "sakura_stairs");
-		sakura_fence = registerBlock(new FenceBlock(Block.Properties.from(sakura_planks)), ItemGroup.BUILDING_BLOCKS, "sakura_fence");
-		sakura_fence_gate = registerBlock(new FenceGateBlock(Block.Properties.from(sakura_planks)), ItemGroup.REDSTONE, "sakura_fence_gate");
-		sakura_door = registerBlock(new DoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.PINK_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()), ItemGroup.REDSTONE, "sakura_door");
-		sakura_trapdoor = registerBlock(new TrapDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.PINK_TERRACOTTA).hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()), ItemGroup.REDSTONE, "sakura_trapdoor");
-		sakura_button = registerBlock(new WoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)), ItemGroup.REDSTONE, "sakura_button");
-		sakura_pressure_plate = registerBlock(new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD, MaterialColor.PINK_TERRACOTTA).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD)), ItemGroup.REDSTONE, "sakura_pressure_plate");
-		sakura_sign = registerSignBlock(MaterialColor.PINK_TERRACOTTA, "sakura");
-		//sakura_standing_sign = registerBlock(new ModStandingSignBlock(Block.Properties.from(Blocks.OAK_SIGN), "sakura"), "sakura_sign");
-		//sakura_wall_sign = registerBlock(new ModWallSignBlock(Block.Properties.from(Blocks.OAK_WALL_SIGN), "sakura"), "sakura_wall_sign");
-		potted_sakura_sapling = registerBlock(new FlowerPotBlock(sakura_sapling, Block.Properties.from(Blocks.FLOWER_POT)), "potted_sakura_sapling");
+		List<RegistryObject<? extends Block>> doors = Arrays.asList(
+				PALM_DOOR, SAKURA_DOOR
+				);
 		
-		// Framed Glass
-		framed_glass = registerBlock(new GlassBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_glass");
-		framed_white_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.WHITE, Block.Properties.create(Material.GLASS, DyeColor.WHITE).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_white_stained_glass");
-		framed_orange_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.ORANGE, Block.Properties.create(Material.GLASS, DyeColor.ORANGE).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_orange_stained_glass");
-		framed_magenta_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.MAGENTA, Block.Properties.create(Material.GLASS, DyeColor.MAGENTA).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_magenta_stained_glass");
-		framed_light_blue_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.LIGHT_BLUE, Block.Properties.create(Material.GLASS, DyeColor.LIGHT_BLUE).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_light_blue_stained_glass");
-		framed_yellow_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.YELLOW, Block.Properties.create(Material.GLASS, DyeColor.YELLOW).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_yellow_stained_glass");
-		framed_lime_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.LIME, Block.Properties.create(Material.GLASS, DyeColor.LIME).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_lime_stained_glass");
-		framed_pink_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.PINK, Block.Properties.create(Material.GLASS, DyeColor.PINK).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_pink_stained_glass");
-		framed_gray_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.GRAY, Block.Properties.create(Material.GLASS, DyeColor.GRAY).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_gray_stained_glass");
-		framed_light_gray_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.LIGHT_GRAY, Block.Properties.create(Material.GLASS, DyeColor.LIGHT_GRAY).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_light_gray_stained_glass");
-		framed_cyan_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.CYAN, Block.Properties.create(Material.GLASS, DyeColor.CYAN).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_cyan_stained_glass");
-		framed_purple_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.PURPLE, Block.Properties.create(Material.GLASS, DyeColor.PURPLE).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_purple_stained_glass");
-		framed_blue_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.BLUE, Block.Properties.create(Material.GLASS, DyeColor.BLUE).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_blue_stained_glass");
-		framed_brown_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.BROWN, Block.Properties.create(Material.GLASS, DyeColor.BROWN).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_brown_stained_glass");
-		framed_green_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.GREEN, Block.Properties.create(Material.GLASS, DyeColor.GREEN).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_green_stained_glass");
-		framed_red_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.RED, Block.Properties.create(Material.GLASS, DyeColor.RED).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_red_stained_glass");
-		framed_black_stained_glass = registerBlock(new StainedGlassBlock(DyeColor.BLACK, Block.Properties.create(Material.GLASS, DyeColor.BLACK).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.BUILDING_BLOCKS, "framed_black_stained_glass");
-		framed_glass_pane = registerBlock(new PaneBlock(Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()) {}, ItemGroup.DECORATIONS, "framed_glass_pane");
-		framed_white_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.WHITE, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_white_stained_glass_pane");
-		framed_orange_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.ORANGE, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_orange_stained_glass_pane");
-		framed_magenta_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.MAGENTA, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_magenta_stained_glass_pane");
-		framed_light_blue_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.LIGHT_BLUE, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_light_blue_stained_glass_pane");
-		framed_yellow_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.YELLOW, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_yellow_stained_glass_pane");
-		framed_lime_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.LIME, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_lime_stained_glass_pane");
-		framed_pink_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.PINK, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_pink_stained_glass_pane");
-		framed_gray_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.GRAY, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_gray_stained_glass_pane");
-		framed_light_gray_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.LIGHT_GRAY, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_light_gray_stained_glass_pane");
-		framed_cyan_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.CYAN, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_cyan_stained_glass_pane");
-		framed_purple_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.PURPLE, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_purple_stained_glass_pane");
-		framed_blue_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.BLUE, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_blue_stained_glass_pane");
-		framed_brown_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.BROWN, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_brown_stained_glass_pane");
-		framed_green_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.GREEN, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_green_stained_glass_pane");
-		framed_red_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.RED, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_red_stained_glass_pane");
-		framed_black_stained_glass_pane = registerBlock(new StainedGlassPaneBlock(DyeColor.BLACK, Block.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.GLASS).notSolid()), ItemGroup.DECORATIONS, "framed_black_stained_glass_pane");
+		for (RegistryObject<? extends Block> block : buildingBlocks) {
+			ForgeRegistries.ITEMS.register(new BlockItem(block.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName(block.get().getRegistryName()));
+		}
 		
-		// Candle
-		candle = registerBlock(new CandleBlock(Block.Properties.create(Material.CLAY, MaterialColor.GOLD).hardnessAndResistance(0.2F).setLightLevel((p_235447_0_) -> { return 12; }).sound(SoundType.CLOTH)), ItemGroup.DECORATIONS, "candle");
+		for (RegistryObject<? extends Block> block : decorations) {
+			ForgeRegistries.ITEMS.register(new BlockItem(block.get(), new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName(block.get().getRegistryName()));
+		}
 		
-		// Short Grass
-		short_grass = registerBlock(new ShortGrassBlock(Block.Properties.from(Blocks.GRASS)), ItemGroup.DECORATIONS, "short_grass");
+		for (RegistryObject<? extends Block> block : redstone) {
+			ForgeRegistries.ITEMS.register(new BlockItem(block.get(), new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName(block.get().getRegistryName()));
+		}
 		
-		if (FMLEnvironment.dist == Dist.CLIENT)
-		{
-			RenderTypeLookup.setRenderLayer(palm_sapling, RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(palm_fronds, RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(palm_door, RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(palm_trapdoor, RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(potted_palm_sapling, RenderType.getCutout());
-			
-			RenderTypeLookup.setRenderLayer(sakura_sapling, RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(sakura_blossoms, RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(sakura_door, RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(sakura_trapdoor, RenderType.getCutout());
-			RenderTypeLookup.setRenderLayer(potted_sakura_sapling, RenderType.getCutout());
-			
-			RenderTypeLookup.setRenderLayer(framed_glass, RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(framed_white_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_orange_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_magenta_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_light_blue_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_yellow_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_lime_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_pink_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_gray_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_light_gray_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_cyan_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_purple_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_blue_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_brown_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_green_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_red_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_black_stained_glass, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_glass_pane, RenderType.getCutoutMipped());
-			RenderTypeLookup.setRenderLayer(framed_white_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_orange_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_magenta_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_light_blue_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_yellow_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_lime_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_pink_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_gray_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_light_gray_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_cyan_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_purple_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_blue_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_brown_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_green_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_red_stained_glass_pane, RenderType.getTranslucent());
-			RenderTypeLookup.setRenderLayer(framed_black_stained_glass_pane, RenderType.getTranslucent());
-			
-			RenderTypeLookup.setRenderLayer(short_grass, RenderType.getCutout());
+		for (RegistryObject<? extends Block> block : doors) {
+			ForgeRegistries.ITEMS.register(new BlockItem(block.get(), new Item.Properties().maxStackSize(16).group(ItemGroup.REDSTONE)).setRegistryName(block.get().getRegistryName()));
 		}
 	}
 	
-	// Register new block and item block
-	public static Block registerBlock(Block block, ItemGroup itemGroup, String name)
-	{	
-        BlockItem itemBlock = new BlockItem(block, new Item.Properties().group(itemGroup));
-        
-        block.setRegistryName(name);
-        itemBlock.setRegistryName(name);
-        
-        ForgeRegistries.BLOCKS.register(block);
-        ForgeRegistries.ITEMS.register(itemBlock);
-        
-        return block;
-    }
-	
-	// Register new block for an existing item
-	public static Block registerBlock(Block block, BlockItem itemBlock, String name)
+	public static void registerRendering()
 	{
-	    block.setRegistryName(name);
-	    ForgeRegistries.BLOCKS.register(block);
-	
-	    if (itemBlock != null)
-        {
-            itemBlock.setRegistryName(name);
-            ForgeRegistries.ITEMS.register(itemBlock);
-        }
-
-	    return block;
-    }
-	
-	// Register new block and item block without putting it into creative inventory
-	public static Block registerBlock(Block block, String name)
-    {
-        BlockItem itemBlock = new BlockItem(block, new Item.Properties().group(null));
-        
-        block.setRegistryName(name);
-        itemBlock.setRegistryName(name);
-        
-        ForgeRegistries.BLOCKS.register(block);
-        ForgeRegistries.ITEMS.register(itemBlock);
-        
-        return block;
-    }
-	
-	public static Pair<ModStandingSignBlock, ModWallSignBlock> registerSignBlock(MaterialColor color, String type)
-	{
-		ModStandingSignBlock standing = new ModStandingSignBlock(Block.Properties.from(Blocks.OAK_SIGN), type);
-		ModWallSignBlock wall = new ModWallSignBlock(Block.Properties.from(Blocks.OAK_WALL_SIGN), type);
+		RenderTypeLookup.setRenderLayer(PALM_SAPLING.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(PALM_FRONDS.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(PALM_DOOR.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(PALM_TRAPDOOR.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(POTTED_PALM_SAPLING.get(), RenderType.getCutout());
 		
-		BlockItem itemBlock = new ModSignItem(new Item.Properties().maxStackSize(16).group(ItemGroup.DECORATIONS), standing, wall);
+		RenderTypeLookup.setRenderLayer(SAKURA_SAPLING.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SAKURA_BLOSSOMS.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(SAKURA_DOOR.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SAKURA_TRAPDOOR.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(POTTED_SAKURA_SAPLING.get(), RenderType.getCutout());
 		
-		standing.setRegistryName(type + "_sign");
-		wall.setRegistryName(type + "_wall_sign");
-		itemBlock.setRegistryName(type + "_sign");
+		RenderTypeLookup.setRenderLayer(FRAMED_GLASS.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(FRAMED_WHITE_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_ORANGE_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_MAGENTA_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_LIGHT_BLUE_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_YELLOW_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_LIME_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_PINK_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_GRAY_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_LIGHT_GRAY_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_CYAN_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_PURPLE_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_BLUE_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_BROWN_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_GREEN_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_RED_STAINED_GLASS.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_BLACK_STAINED_GLASS.get(), RenderType.getTranslucent());
 		
-		ForgeRegistries.BLOCKS.register(standing);
-		ForgeRegistries.BLOCKS.register(wall);
-        ForgeRegistries.ITEMS.register(itemBlock);
+		RenderTypeLookup.setRenderLayer(FRAMED_GLASS_PANE.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(FRAMED_WHITE_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_ORANGE_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_MAGENTA_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_LIGHT_BLUE_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_YELLOW_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_LIME_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_PINK_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_GRAY_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_LIGHT_GRAY_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_CYAN_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_PURPLE_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_BLUE_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_BROWN_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_GREEN_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_RED_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(FRAMED_BLACK_STAINED_GLASS_PANE.get(), RenderType.getTranslucent());
 		
-		return Pair.of(standing, wall);
+		RenderTypeLookup.setRenderLayer(SHORT_GRASS.get(), RenderType.getCutout());
 	}
 }

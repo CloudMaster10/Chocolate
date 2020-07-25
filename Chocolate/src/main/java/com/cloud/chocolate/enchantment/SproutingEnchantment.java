@@ -63,7 +63,7 @@ public class SproutingEnchantment extends Enchantment
             ItemStack heldItem = event.getPlayer().getItemStackFromSlot(EquipmentSlotType.MAINHAND);
             if(!heldItem.isEmpty())
             {
-	            int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.sprouting, heldItem);
+	            int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.SPROUTING.get(), heldItem);
 				if(level > 0)
 				{
 		            World world = event.getPlayer().getEntityWorld();

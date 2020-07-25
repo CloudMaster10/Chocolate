@@ -95,27 +95,27 @@ public class ModVanillaCompat
 		// Set Flammable
 		FireBlock fireblock = (FireBlock)Blocks.FIRE;
 		
-        fireblock.setFireInfo(ModBlocks.palm_fronds, 30, 60);
-        fireblock.setFireInfo(ModBlocks.palm_log, 5, 5);
-        fireblock.setFireInfo(ModBlocks.palm_wood, 5, 5);
-        fireblock.setFireInfo(ModBlocks.stripped_palm_log, 5, 5);
-        fireblock.setFireInfo(ModBlocks.stripped_palm_wood, 5, 5);
-        fireblock.setFireInfo(ModBlocks.palm_planks, 5, 20);
-        fireblock.setFireInfo(ModBlocks.palm_slab, 5, 20);
-        fireblock.setFireInfo(ModBlocks.palm_stairs, 5, 20);
-        fireblock.setFireInfo(ModBlocks.palm_fence, 5, 20);
-        fireblock.setFireInfo(ModBlocks.palm_fence_gate, 5, 20);
+        fireblock.setFireInfo(ModBlocks.PALM_FRONDS.get(), 30, 60);
+        fireblock.setFireInfo(ModBlocks.PALM_LOG.get(), 5, 5);
+        fireblock.setFireInfo(ModBlocks.PALM_WOOD.get(), 5, 5);
+        fireblock.setFireInfo(ModBlocks.STRIPPED_PALM_LOG.get(), 5, 5);
+        fireblock.setFireInfo(ModBlocks.STRIPPED_PALM_WOOD.get(), 5, 5);
+        fireblock.setFireInfo(ModBlocks.PALM_PLANKS.get(), 5, 20);
+        fireblock.setFireInfo(ModBlocks.PALM_SLAB.get(), 5, 20);
+        fireblock.setFireInfo(ModBlocks.PALM_STAIRS.get(), 5, 20);
+        fireblock.setFireInfo(ModBlocks.PALM_FENCE.get(), 5, 20);
+        fireblock.setFireInfo(ModBlocks.PALM_FENCE_GATE.get(), 5, 20);
         
-        fireblock.setFireInfo(ModBlocks.sakura_blossoms, 30, 60);
-        fireblock.setFireInfo(ModBlocks.sakura_log, 5, 5);
-        fireblock.setFireInfo(ModBlocks.sakura_wood, 5, 5);
-        fireblock.setFireInfo(ModBlocks.stripped_sakura_log, 5, 5);
-        fireblock.setFireInfo(ModBlocks.stripped_sakura_wood, 5, 5);
-        fireblock.setFireInfo(ModBlocks.sakura_planks, 5, 20);
-        fireblock.setFireInfo(ModBlocks.sakura_slab, 5, 20);
-        fireblock.setFireInfo(ModBlocks.sakura_stairs, 5, 20);
-        fireblock.setFireInfo(ModBlocks.sakura_fence, 5, 20);
-        fireblock.setFireInfo(ModBlocks.sakura_fence_gate, 5, 20);
+        fireblock.setFireInfo(ModBlocks.SAKURA_BLOSSOMS.get(), 30, 60);
+        fireblock.setFireInfo(ModBlocks.SAKURA_LOG.get(), 5, 5);
+        fireblock.setFireInfo(ModBlocks.SAKURA_WOOD.get(), 5, 5);
+        fireblock.setFireInfo(ModBlocks.STRIPPED_SAKURA_LOG.get(), 5, 5);
+        fireblock.setFireInfo(ModBlocks.STRIPPED_SAKURA_WOOD.get(), 5, 5);
+        fireblock.setFireInfo(ModBlocks.SAKURA_PLANKS.get(), 5, 20);
+        fireblock.setFireInfo(ModBlocks.SAKURA_SLAB.get(), 5, 20);
+        fireblock.setFireInfo(ModBlocks.SAKURA_STAIRS.get(), 5, 20);
+        fireblock.setFireInfo(ModBlocks.SAKURA_FENCE.get(), 5, 20);
+        fireblock.setFireInfo(ModBlocks.SAKURA_FENCE_GATE.get(), 5, 20);
         
         // Set Strippable
         try
@@ -128,24 +128,27 @@ public class ModVanillaCompat
 		}
         
         // Set Compostable
-        ComposterBlock.CHANCES.put(ModBlocks.palm_sapling, 0.3F);
-        ComposterBlock.CHANCES.put(ModBlocks.palm_fronds, 0.3F);
-        ComposterBlock.CHANCES.put(ModBlocks.sakura_sapling, 0.3F);
-        ComposterBlock.CHANCES.put(ModBlocks.sakura_blossoms, 0.3F);
+        ComposterBlock.CHANCES.put(ModBlocks.PALM_SAPLING.get(), 0.3F);
+        ComposterBlock.CHANCES.put(ModBlocks.PALM_FRONDS.get(), 0.3F);
+        ComposterBlock.CHANCES.put(ModBlocks.SAKURA_SAPLING.get(), 0.3F);
+        ComposterBlock.CHANCES.put(ModBlocks.SAKURA_BLOSSOMS.get(), 0.3F);
         
         // Create Brewing Recipies
-        PotionBrewing.addMix(Potions.AWKWARD, Items.NAUTILUS_SHELL, ModPotions.haste);
-        PotionBrewing.addMix(ModPotions.haste, Items.REDSTONE, ModPotions.long_haste);
-        PotionBrewing.addMix(ModPotions.haste, Items.GLOWSTONE_DUST, ModPotions.strong_haste);
-        PotionBrewing.addMix(ModPotions.haste, Items.FERMENTED_SPIDER_EYE, ModPotions.mining_fatigue);
-        PotionBrewing.addMix(ModPotions.long_haste, Items.FERMENTED_SPIDER_EYE, ModPotions.long_mining_fatigue);
-        PotionBrewing.addMix(ModPotions.strong_haste, Items.FERMENTED_SPIDER_EYE, ModPotions.strong_mining_fatigue);
-        PotionBrewing.addMix(Potions.AWKWARD, Items.SHULKER_SHELL, ModPotions.resistance);
-        PotionBrewing.addMix(ModPotions.resistance, Items.REDSTONE, ModPotions.long_resistance);
-        PotionBrewing.addMix(ModPotions.resistance, Items.GLOWSTONE_DUST, ModPotions.strong_resistance);
-        PotionBrewing.addMix(Potions.AWKWARD, Items.WITHER_ROSE, ModPotions.wither);
-        PotionBrewing.addMix(ModPotions.wither, Items.REDSTONE, ModPotions.long_wither);
-        PotionBrewing.addMix(ModPotions.wither, Items.GLOWSTONE_DUST, ModPotions.strong_wither);
+        PotionBrewing.addMix(Potions.AWKWARD, Items.NAUTILUS_SHELL, ModPotionTypes.HASTE.get());
+        PotionBrewing.addMix(ModPotionTypes.HASTE.get(), Items.REDSTONE, ModPotionTypes.LONG_HASTE.get());
+        PotionBrewing.addMix(ModPotionTypes.HASTE.get(), Items.GLOWSTONE_DUST, ModPotionTypes.STRONG_HASTE.get());
+        
+        PotionBrewing.addMix(ModPotionTypes.HASTE.get(), Items.FERMENTED_SPIDER_EYE, ModPotionTypes.MINING_FATIGUE.get());
+        PotionBrewing.addMix(ModPotionTypes.LONG_HASTE.get(), Items.FERMENTED_SPIDER_EYE, ModPotionTypes.LONG_MINING_FATIGUE.get());
+        PotionBrewing.addMix(ModPotionTypes.STRONG_HASTE.get(), Items.FERMENTED_SPIDER_EYE, ModPotionTypes.STRONG_MINING_FATIGUE.get());
+        
+        PotionBrewing.addMix(Potions.AWKWARD, Items.SHULKER_SHELL, ModPotionTypes.RESISTANCE.get());
+        PotionBrewing.addMix(ModPotionTypes.RESISTANCE.get(), Items.REDSTONE, ModPotionTypes.LONG_RESISTANCE.get());
+        PotionBrewing.addMix(ModPotionTypes.RESISTANCE.get(), Items.GLOWSTONE_DUST, ModPotionTypes.STRONG_RESISTANCE.get());
+        
+        PotionBrewing.addMix(Potions.AWKWARD, Items.WITHER_ROSE, ModPotionTypes.WITHER.get());
+        PotionBrewing.addMix(ModPotionTypes.WITHER.get(), Items.REDSTONE, ModPotionTypes.LONG_WITHER.get());
+        PotionBrewing.addMix(ModPotionTypes.WITHER.get(), Items.GLOWSTONE_DUST, ModPotionTypes.STRONG_WITHER.get());
 	}
 	
 	private static void addStripping() throws NoSuchFieldException, IllegalAccessException
@@ -160,10 +163,10 @@ public class ModVanillaCompat
 	    Map<Block, Block> strip_map = (Map<Block, Block>) map.get(null);
 	    HashMap<Block, Block> new_map = new HashMap<>(strip_map);
 	    
-	    new_map.put(ModBlocks.palm_log, ModBlocks.stripped_palm_log);
-	    new_map.put(ModBlocks.palm_wood, ModBlocks.stripped_palm_wood);
-	    new_map.put(ModBlocks.sakura_log, ModBlocks.stripped_sakura_log);
-	    new_map.put(ModBlocks.sakura_wood, ModBlocks.stripped_sakura_wood);
+	    new_map.put(ModBlocks.PALM_LOG.get(), ModBlocks.STRIPPED_PALM_LOG.get());
+	    new_map.put(ModBlocks.PALM_WOOD.get(), ModBlocks.STRIPPED_PALM_WOOD.get());
+	    new_map.put(ModBlocks.SAKURA_LOG.get(), ModBlocks.STRIPPED_SAKURA_LOG.get());
+	    new_map.put(ModBlocks.SAKURA_WOOD.get(), ModBlocks.STRIPPED_SAKURA_WOOD.get());
 	    
 	    map.set(null, new_map);
 	}

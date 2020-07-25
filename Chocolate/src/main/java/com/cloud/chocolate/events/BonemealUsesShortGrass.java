@@ -65,10 +65,10 @@ public class BonemealUsesShortGrass {
 									}
 									
 									// Grow short grass into tall grass (1/8 chance)
-									if (thisState.getBlock() == ModBlocks.short_grass && world.getRandom().nextInt(8) == 0)
+									if (thisState.getBlock() == ModBlocks.SHORT_GRASS.get() && world.getRandom().nextInt(8) == 0)
 									{
 										//BlockState shortGrassState = ModBlocks.short_grass.getDefaultState();
-										((IGrowable) ModBlocks.short_grass).grow((ServerWorld) world, world.getRandom(), thisPos, thisState);
+										((IGrowable) ModBlocks.SHORT_GRASS.get()).grow((ServerWorld) world, world.getRandom(), thisPos, thisState);
 									}
 									
 									if (thisState.isAir())
@@ -111,7 +111,7 @@ public class BonemealUsesShortGrass {
 											}
 											else
 											{
-												stateToPlant = ModBlocks.short_grass.getDefaultState();
+												stateToPlant = ModBlocks.SHORT_GRASS.get().getDefaultState();
 											}
 											
 										}

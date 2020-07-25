@@ -54,7 +54,7 @@ public class ScytheEnchantment extends Enchantment
             	ItemStack heldItem = player.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
 	            if(!heldItem.isEmpty())
 	            {
-		            if(EnchantmentHelper.getEnchantments(heldItem).containsKey(ModEnchantments.scythe))
+		            if(EnchantmentHelper.getEnchantments(heldItem).containsKey(ModEnchantments.SCYTHE.get()))
 			        {
 			            // Harvest all mature crops in the 3x3 area surrounding pos and if the tool has sprouting, replant
 			            World world = player.getEntityWorld();
@@ -62,7 +62,7 @@ public class ScytheEnchantment extends Enchantment
 			            BlockPos thisPos = pos;
 			            BlockState thisState = state;
 			            
-			            int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.sprouting, heldItem);
+			            int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.SPROUTING.get(), heldItem);
 						if(level > 0)
 						{
 							for(int i = 0; i < 9; i++)

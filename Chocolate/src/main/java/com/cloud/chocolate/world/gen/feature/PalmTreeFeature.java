@@ -117,7 +117,7 @@ public class PalmTreeFeature
 		//FoliagePlacer.func_236753_a_(worldIn, rand, config, position, 0, set2, 0, false, box);
 		if(forceUpdate)
 		{
-			((IWorld) worldIn).getPendingBlockTicks().scheduleTick(blockpos, ModBlocks.palm_fronds, 1);
+			((IWorld) worldIn).getPendingBlockTicks().scheduleTick(blockpos, ModBlocks.PALM_FRONDS.get(), 1);
 		}
 
 	}

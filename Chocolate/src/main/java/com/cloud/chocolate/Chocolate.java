@@ -1,8 +1,10 @@
 package com.cloud.chocolate;
 
 import com.cloud.chocolate.init.ModBlocks;
-import com.cloud.chocolate.init.ModEntities;
-import com.cloud.chocolate.init.ModTileEntities;
+import com.cloud.chocolate.init.ModEnchantments;
+import com.cloud.chocolate.init.ModEntityTypes;
+import com.cloud.chocolate.init.ModItems;
+import com.cloud.chocolate.init.ModPotionTypes;
 import com.cloud.chocolate.init.ModVanillaCompat;
 
 import net.minecraft.block.BlockState;
@@ -36,6 +38,12 @@ public class Chocolate
     	modEventBus.addListener(Chocolate::commonInit);
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> modEventBus.addListener(Chocolate::clientInit));
         
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModEnchantments.ENCHANTMENTS.register(modEventBus);
+        ModEntityTypes.ENTITY_TYPES.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
+        ModPotionTypes.POTION_TYPES.register(modEventBus);
+        
     	instance = this;
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -48,8 +56,8 @@ public class Chocolate
     public static void clientInit(FMLClientSetupEvent event)
 	{
     	// Rendering Set-up
-    	ModEntities.registerRendering();
-    	ModTileEntities.registerRendering();
+    	ModBlocks.registerRendering();
+    	ModEntityTypes.registerRendering();
     	
     	//ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN.get(), ModSignTileEntityRenderer::new);
     	
@@ -60,11 +68,11 @@ public class Chocolate
         // Block Coloring
         blockColors.register((state, world, pos, tintIndex) ->
 	        world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefault(),
-	        ModBlocks.palm_fronds);
+	        ModBlocks.PALM_FRONDS.get());
         
         blockColors.register((state, world, pos, tintIndex) ->
         	world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.get(0.5D, 1.0D),
-        	ModBlocks.short_grass);
+        	ModBlocks.SHORT_GRASS.get());
         
         //blockColors.register((state, world, pos, tintIndex) -> 16754619, ModBlocks.sakura_blossoms);
         
@@ -72,7 +80,7 @@ public class Chocolate
         itemColors.register((stack, tintIndex) -> {
             BlockState BlockState = ((BlockItem)stack.getItem()).getBlock().getDefaultState();
             return blockColors.getColor(BlockState, null, null, tintIndex); }, 
-        		ModBlocks.palm_fronds, ModBlocks.short_grass);
+        		ModBlocks.PALM_FRONDS.get(), ModBlocks.SHORT_GRASS.get());
         
         //itemColors.register((stack, tintIndex) -> {return 16754619; }, ModBlocks.sakura_blossoms);
 	}

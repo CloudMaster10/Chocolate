@@ -1,7 +1,6 @@
 package com.cloud.chocolate.block;
 
 import com.cloud.chocolate.Chocolate;
-import com.cloud.chocolate.init.ModTileEntities;
 import com.cloud.chocolate.tileentity.ModSignTileEntity;
 
 import net.minecraft.block.AbstractSignBlock;
@@ -16,7 +15,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public abstract class ModAbstractSignBlock extends AbstractSignBlock

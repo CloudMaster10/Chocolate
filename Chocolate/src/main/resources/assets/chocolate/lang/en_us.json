@@ -96,7 +96,14 @@
 	
 	"block.chocolate.short_grass": "Short Grass",
 	
+	
+	"entity.chocolate.boat": "Boat",
+	"entity.chocolate.fungal_mooshroom": "Fungal Mooshroom",
+	
+	
 	"item.chocolate.palm_boat": "Palm Boat",
+	
+	"item.chocolate.fungal_mooshroom_spawn_egg": "Fungal Mooshroom Spawn Egg",
 	
 	"item.minecraft.potion.effect.haste": "Potion of Haste",
     "item.minecraft.potion.effect.fatigue": "Potion of Fatigue",

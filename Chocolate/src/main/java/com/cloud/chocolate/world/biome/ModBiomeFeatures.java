@@ -28,11 +28,11 @@ import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 
 public class ModBiomeFeatures
 {
-	private static final BlockState PALM_LOG = ModBlocks.palm_log.getDefaultState();
-	private static final BlockState PALM_LEAVES = ModBlocks.palm_fronds.getDefaultState();
-	private static final BlockState SAKURA_LOG = ModBlocks.sakura_log.getDefaultState();
-	private static final BlockState SAKURA_LEAVES = ModBlocks.sakura_blossoms.getDefaultState();
-	private static final BlockState SHORT_GRASS = ModBlocks.short_grass.getDefaultState();
+	private static final BlockState PALM_LOG = ModBlocks.PALM_LOG.get().getDefaultState();
+	private static final BlockState PALM_LEAVES = ModBlocks.PALM_FRONDS.get().getDefaultState();
+	private static final BlockState SAKURA_LOG = ModBlocks.SAKURA_LOG.get().getDefaultState();
+	private static final BlockState SAKURA_LEAVES = ModBlocks.SAKURA_BLOSSOMS.get().getDefaultState();
+	private static final BlockState SHORT_GRASS = ModBlocks.SHORT_GRASS.get().getDefaultState();
 	
 	public static final BaseTreeFeatureConfig PALM_TREE_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(PALM_LOG), new SimpleBlockStateProvider(PALM_LEAVES), new PalmFoliagePlacer(3, 0, 0, 0), new LeaningTrunkPlacer(6, 0, 0), new TwoLayerFeature(1, 0, 1))).func_236700_a_().build();
 	public static final BaseTreeFeatureConfig SAKURA_TREE_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(SAKURA_LOG), new SimpleBlockStateProvider(SAKURA_LEAVES), new BlobFoliagePlacer(2, 0, 0, 0, 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayerFeature(1, 0, 1))).func_236700_a_().build();

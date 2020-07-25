@@ -11,36 +11,19 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantment.Rarity;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = Chocolate.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEnchantments {
     
-	public static Enchantment stomping;
+	public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, Chocolate.MOD_ID);
 	
-	public static Enchantment sprouting;
-	public static Enchantment cultivator;
-	public static Enchantment scythe;
+	public static final RegistryObject<Enchantment> STOMPING = ENCHANTMENTS.register("stomping", () -> new StompingEnchantment(Rarity.UNCOMMON, EnchantmentType.ARMOR_FEET, new EquipmentSlotType[]{EquipmentSlotType.FEET}));
 	
-	@SubscribeEvent
-	public static void registerEnchantments(RegistryEvent.Register<Enchantment> event)
-	{
-		stomping = registerEnchantment(new StompingEnchantment(Rarity.UNCOMMON, EnchantmentType.ARMOR_FEET, new EquipmentSlotType[]{EquipmentSlotType.FEET}), "stomping");
-		
-		sprouting = registerEnchantment(new SproutingEnchantment(Rarity.UNCOMMON, ModEnchantmentType.HOE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}), "sprouting");
-		cultivator = registerEnchantment(new CultivatorEnchantment(Rarity.UNCOMMON, ModEnchantmentType.HOE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}), "cultivator");
-		scythe = registerEnchantment(new ScytheEnchantment(Rarity.RARE, ModEnchantmentType.HOE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}), "scythe");
-	}
-	
-	public static Enchantment registerEnchantment(Enchantment enchantment, String name) {
-		
-		enchantment.setRegistryName(name);
-		ForgeRegistries.ENCHANTMENTS.register(enchantment);
-		
-		return enchantment;
-	}
-	
+	public static final RegistryObject<Enchantment> SPROUTING = ENCHANTMENTS.register("sprouting", () -> new SproutingEnchantment(Rarity.UNCOMMON, ModEnchantmentType.HOE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
+	public static final RegistryObject<Enchantment> CULTIVATOR = ENCHANTMENTS.register("cultivator", () -> new CultivatorEnchantment(Rarity.UNCOMMON, ModEnchantmentType.HOE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
+	public static final RegistryObject<Enchantment> SCYTHE = ENCHANTMENTS.register("scythe", () -> new ScytheEnchantment(Rarity.RARE, ModEnchantmentType.HOE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND}));
 }

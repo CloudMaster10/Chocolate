@@ -83,7 +83,7 @@ public class StompingEnchantment extends Enchantment
                 ItemStack stack = stomperEntity.getItemStackFromSlot(EquipmentSlotType.FEET);
                 if(!stack.isEmpty())
                 {
-                	int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.stomping, stack);
+                	int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.STOMPING.get(), stack);
                 	if(level > 0)
                 	{
                 		float heightFactor = Math.min(2.0F, 1.0F + (event.getAmount() * 0.05F));
