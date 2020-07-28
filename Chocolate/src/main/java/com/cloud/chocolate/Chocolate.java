@@ -30,7 +30,7 @@ public class Chocolate
     //private static final Logger LOGGER = LogManager.getLogger();
 	public static final String MOD_ID = "chocolate";
 	public static Chocolate instance;
-
+	
     public Chocolate()
     {
     	final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -51,6 +51,7 @@ public class Chocolate
     public static void commonInit(FMLCommonSetupEvent event)
 	{	
     	ModVanillaCompat.setup();
+    	ModEntityTypes.addEntityAttributes();
 	}
     
     public static void clientInit(FMLClientSetupEvent event)
@@ -58,9 +59,7 @@ public class Chocolate
     	// Rendering Set-up
     	ModBlocks.registerRendering();
     	ModEntityTypes.registerRendering();
-    	
-    	//ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN.get(), ModSignTileEntityRenderer::new);
-    	
+    	    	
     	// Foliage Coloring
     	BlockColors blockColors = Minecraft.getInstance().getBlockColors();
         ItemColors itemColors = Minecraft.getInstance().getItemColors();
@@ -84,5 +83,4 @@ public class Chocolate
         
         //itemColors.register((stack, tintIndex) -> {return 16754619; }, ModBlocks.sakura_blossoms);
 	}
-    
 }
