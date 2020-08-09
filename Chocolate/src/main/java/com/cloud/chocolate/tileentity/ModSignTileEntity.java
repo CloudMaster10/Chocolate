@@ -160,7 +160,7 @@ public class ModSignTileEntity extends TileEntity {
 		String s = playerIn == null ? "Sign" : playerIn.getName().getString();
 		ITextComponent itextcomponent = (ITextComponent) (playerIn == null ? new StringTextComponent("Sign")
 				: playerIn.getDisplayName());
-		return new CommandSource(ICommandSource.DUMMY, Vector3d.func_237489_a_(this.pos), Vector2f.ZERO,
+		return new CommandSource(ICommandSource.DUMMY, Vector3d.copyCentered(this.pos), Vector2f.ZERO,
 				(ServerWorld) this.world, 2, s, itextcomponent, this.world.getServer(), playerIn);
 	}
 

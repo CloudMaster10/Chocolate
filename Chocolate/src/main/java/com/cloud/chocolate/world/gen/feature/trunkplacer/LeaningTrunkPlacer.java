@@ -23,7 +23,7 @@ public class LeaningTrunkPlacer extends AbstractTrunkPlacer {
 
 	@Override
 	protected TrunkPlacerType<?> func_230381_a_() {
-		return TrunkPlacerType.field_236920_a_;
+		return TrunkPlacerType.STRAIGHT_TRUNK_PLACER;
 	}
 
 	@Override

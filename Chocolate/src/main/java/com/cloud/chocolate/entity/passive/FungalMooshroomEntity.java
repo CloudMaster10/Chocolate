@@ -3,7 +3,6 @@ package com.cloud.chocolate.entity.passive;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -15,24 +14,16 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IShearable;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.BreedGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
-import net.minecraft.entity.ai.goal.PrioritizedGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -46,7 +37,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class FungalMooshroomEntity extends CowEntity implements IShearable, net.minecraftforge.common.IForgeShearable
 {
@@ -98,7 +88,7 @@ public class FungalMooshroomEntity extends CowEntity implements IShearable, net.
 
 	// Replace with cow entity when sheared
 	@Override
-	public void func_230263_a_(SoundCategory p_230263_1_)
+	public void shear(SoundCategory p_230263_1_)
 	{
 		this.world.playMovingSound((PlayerEntity) null, this, SoundEvents.ENTITY_MOOSHROOM_SHEAR, p_230263_1_, 1.0F, 1.0F);
 		if (!this.world.isRemote())
@@ -131,9 +121,8 @@ public class FungalMooshroomEntity extends CowEntity implements IShearable, net.
 		}
 	}
 
-	// Is shearable
 	@Override
-	public boolean func_230262_K__()
+	public boolean isShearable()
 	{
 		return this.isAlive() && !this.isChild();
 	}
@@ -173,7 +162,7 @@ public class FungalMooshroomEntity extends CowEntity implements IShearable, net.
 	@Override
 	public boolean isShearable(@Nonnull ItemStack item, World world, BlockPos pos)
 	{
-		return func_230262_K__();
+		return isShearable();
 	}
 	
 	@Nonnull

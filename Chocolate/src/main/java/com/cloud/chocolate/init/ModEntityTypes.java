@@ -28,7 +28,7 @@ public class ModEntityTypes
 	// Create entity data
 	public static void addEntityAttributes()
 	{
-		GlobalEntityTypeAttributes.put(FUNGAL_MOOSHROOM.get(), CowEntity.func_234188_eI_().func_233813_a_());
+		GlobalEntityTypeAttributes.put(FUNGAL_MOOSHROOM.get(), CowEntity.func_234188_eI_().create());
 	}
 	
 	// Set up renderers

@@ -118,12 +118,12 @@ public class MooshroomConversion
 	
 	private static FungalMooshroomEntity.Type conversionCheck(Biome biome, BlockState blockstate)
 	{
-		if(biome == Biomes.field_235253_az_ && (blockstate == Blocks.CRIMSON_NYLIUM.getDefaultState() || blockstate == Blocks.NETHER_WART_BLOCK.getDefaultState()))
+		if(biome == Biomes.CRIMSON_FOREST && (blockstate == Blocks.CRIMSON_NYLIUM.getDefaultState() || blockstate == Blocks.NETHER_WART_BLOCK.getDefaultState()))
 		{
 			return FungalMooshroomEntity.Type.CRIMSON;
 		}
 		
-		if(biome == Biomes.field_235250_aA_ && (blockstate == Blocks.WARPED_NYLIUM.getDefaultState() || blockstate == Blocks.WARPED_WART_BLOCK.getDefaultState()))
+		if(biome == Biomes.WARPED_FOREST && (blockstate == Blocks.WARPED_NYLIUM.getDefaultState() || blockstate == Blocks.WARPED_WART_BLOCK.getDefaultState()))
 		{
 			return FungalMooshroomEntity.Type.WARPED;
 		}
