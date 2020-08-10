@@ -6,6 +6,7 @@ import com.cloud.chocolate.init.ModEntityTypes;
 import com.cloud.chocolate.init.ModItems;
 import com.cloud.chocolate.init.ModPotionTypes;
 import com.cloud.chocolate.init.ModVanillaCompat;
+import com.cloud.chocolate.item.ModSpawnEggItem;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -52,6 +53,7 @@ public class Chocolate
 	{	
     	ModVanillaCompat.setup();
     	ModEntityTypes.addEntityAttributes();
+    	ModSpawnEggItem.registerDispenseBehavior();
 	}
     
     public static void clientInit(FMLClientSetupEvent event)
