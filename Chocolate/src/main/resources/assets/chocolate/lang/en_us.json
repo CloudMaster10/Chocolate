@@ -96,15 +96,35 @@
 	
 	"block.chocolate.short_grass": "Short Grass",
 	
+	"death.attack.stomping": "%1$s was stomped to death",
+	"death.attack.stomping.player": "%1$s was crushed under %2$s's stomp",
+	"death.attack.stomping.player.assist": "%1$s was was stomped to death whilst fighting %2$s",
+	"death.attack.stomping.player.item": "%1$s was crushed under %2$s's stomp using %3$s",
+	
+	"enchantment.chocolate.stomping": "Stomping",
+	"enchantment.chocolate.sprouting": "Sprouting",
+	"enchantment.chocolate.cultivator": "Cultivator",
+	"enchantment.chocolate.scythe": "Scythe",
 	
 	"entity.chocolate.boat": "Boat",
 	"entity.chocolate.fungal_mooshroom": "Fungal Mooshroom",
 	
+	"item.chocolate.biome_map.desert": "Desert Explorer Map",
+	"item.chocolate.biome_map.mountains": "Mountain Explorer Map",
+	"item.chocolate.biome_map.swamp": "Swamp Explorer Map",
+	"item.chocolate.biome_map.snowy_tundra": "Snowy Tundra Explorer Map",
+	"item.chocolate.biome_map.mushroom_fields": "Mushroom Island Explorer Map",
+	"item.chocolate.biome_map.jungle": "Jungle Explorer Map",
+	"item.chocolate.biome_map.dark_forest": "Dark Forest Explorer Map",
+	"item.chocolate.biome_map.giant_tree_taiga": "Giant Tree Taiga Explorer Map",
+	"item.chocolate.biome_map.savanna": "Savanna Explorer Map",
+	"item.chocolate.biome_map.badlands": "Badlands Explorer Map",
+	"item.chocolate.biome_map.flower_forest": "Flower Forest Explorer Map",
+	"item.chocolate.biome_map.ice_spikes": "Ice Spikes Explorer Map",
 	
 	"item.chocolate.palm_boat": "Palm Boat",
-	
 	"item.chocolate.fungal_mooshroom_spawn_egg": "Fungal Mooshroom Spawn Egg",
-	
+
 	"item.minecraft.potion.effect.haste": "Potion of Haste",
     "item.minecraft.potion.effect.fatigue": "Potion of Fatigue",
     "item.minecraft.potion.effect.resistance": "Potion of Resistance",
@@ -119,15 +139,5 @@
     "item.minecraft.lingering_potion.effect.fatigue": "Lingering Potion of Fatigue",
     "item.minecraft.lingering_potion.effect.resistance": "Lingering Potion of Resistance",
     "item.minecraft.lingering_potion.effect.levitation": "Lingering Potion of Levitation",
-    "item.minecraft.lingering_potion.effect.wither": "Lingering Potion of Decay",
-	
-	"enchantment.chocolate.stomping": "Stomping",
-	"enchantment.chocolate.sprouting": "Sprouting",
-	"enchantment.chocolate.cultivator": "Cultivator",
-	"enchantment.chocolate.scythe": "Scythe",
-	
-	"death.attack.stomping": "%1$s was stomped to death",
-	"death.attack.stomping.player": "%1$s was crushed under %2$s's stomp",
-	"death.attack.stomping.player.assist": "%1$s was was stomped to death whilst fighting %2$s",
-	"death.attack.stomping.player.item": "%1$s was crushed under %2$s's stomp using %3$s"
+    "item.minecraft.lingering_potion.effect.wither": "Lingering Potion of Decay"
 }
